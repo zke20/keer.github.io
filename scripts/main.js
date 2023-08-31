@@ -514,3 +514,21 @@ document.addEventListener('scroll', function () {
     button1.style.transform = 'rotate(0deg)';
   }
 })
+//---------视频暂停-----------
+var drag = document.querySelector('.drag');
+var concert = document.querySelector('.concert');
+document.addEventListener('scroll', function () {
+  if (window.scrollY > 11000 && window.scrollY < 14000) {
+    drag.src = 'https://www.youtube.com/embed/E7H0TN79wDA?si=XR7KIpCCfS327-Wt&autoplay=1'
+  } else {
+    drag.src = ' ';
+  }
+})
+
+document.addEventListener('scroll', function () {
+  if (window.scrollY > 14000 && window.scrollY < 17000) {
+    concert.src = 'https://www.youtube.com/embed/cj4UaarC28I?si=8Hg4I3_QIH5LWEW7&autoplay=1'
+  } else {
+    concert.src = ' ';
+  }
+})
