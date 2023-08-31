@@ -1,21 +1,953 @@
-img[src] {
-    color: blue;width: 900px;
-    border: 1px solid black;
+/* 结构 */
+html {
+  background-color: rgb(0, 0, 0);
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Showcard Gothic',
+    'Berlin Sans FB Demi', 'Noto Sans SC', Courier, monospace;
+  font-size: 18px;
+  background-image: url(../images/star.gif);
+  background-size: 40%;
+  background-attachment: fixed;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+
+  list-style-type: none;
+}
+
+/*---------box通用样式---------*/
+.box {
+  width: 60px;
+  height: 60px;
+  border-radius: 10%;
+  font-family: 'Noto Sans SC', Courier, monospace;
+  text-align: center;
+}
+
+.red {
+  background-color: rgb(255, 92, 92);
+  color: #000000;
+}
+
+.black {
+  font-size: 30px;
+  line-height: 54px;
+  letter-spacing: 6px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
+  padding-left: 5px;
+}
+
+.keer,
+.me {
+  font-size: 25px;
+  letter-spacing: 8px;
+  padding-top: 5px;
+  padding-left: 10px;
+}
+
+.me {
+  line-height: 50px;
+}
+
+.keer {
+  line-height: 25px;
+}
+
+.gamedesigner {
+  line-height: 19px;
+  letter-spacing: 1px;
+  padding-left: 2px;
+  padding-top: 2px;
+}
+
+.eter {
+  background-color: rgb(255, 32, 32);
+}
+
+/* ------头部盒子位置---------*/
+.head {
+  position: sticky;
+  top: 0;
+  height: 70px;
+  background-color: #000000;
+  z-index: 5;
+  padding-top: 70px
+}
+
+.head ul li {
+  position: absolute;
+}
+
+#head1 {
+  left: 80px;
+}
+
+#head2 {
+  left: 150px;
+}
+
+#head3 {
+  left: 350px;
+}
+
+
+/*-----------右侧栏盒子位置-----------*/
+.right {
+  position: fixed;
+  bottom: 0;
+  right: 0px;
+  width: 100px;
+  height: 250px;
+  z-index: 6;
+  padding-right: 20px;
+}
+
+.fixedbox li {
+  position: fixed;
+}
+
+.rightbox li {
+  position: absolute;
+}
+
+#fixed2 {
+  top: 90px;
+}
+
+#fixed1 {
+  top: 20px;
+}
+
+#fixed3 {
+  top: 160px;
+}
+
+
+#right2 {
+  top: 70px;
+}
+
+#right3 {
+  left: -161px;
+  top: 140px;
+}
+
+/* ----------动画----------------*/
+@keyframes rota {
+  0% {
+    transform: rotate(-2deg);
+    transform-origin: center;
   }
-  html {
-    font-size: 15px; /* px 表示“像素（pixel）”: 基础字号为 10 像素 */
-    font-family: "Open Sans", sans-serif; /* 这应该是你从 Google Fonts 得到的其余输出。 */
-    background-color: #ffffff;
+
+  50% {
+    transform: rotate(2deg);
+    transform-origin: center;
   }
-  h1 {
-    font-size: 60px;
-    text-align: center;
+
+  100% {
+    transform: rotate(-2deg);
+    transform-origin: center;
   }
-  
-  p,
-  li {
-    font-size: 16px;
-    line-height: 2;
-    letter-spacing: 1px;
-  }
-  
+}
+
+
+/* 调用动画*/
+.red {
+  animation: rota 0.5s steps(1) infinite;
+}
+
+.black {
+  animation: rota 0.5s steps(1) infinite;
+  animation-delay: 0.25s;
+}
+
+/* 游戏部分背景框顶部*/
+.gameall {
+  visibility: hidden;
+}
+
+.gameboxtop {
+  margin-top: -10px;
+  position: fixed;
+  top: 150px;
+  left: 60px;
+  width: 1505px;
+  height: 60px;
+  z-index: 3;
+  background-color: #3f3f3f00;
+  box-shadow: 0px 10px 0px 10px rgba(190, 91, 10, 0) inset;
+  border-top: 5px solid rgb(117, 117, 117);
+}
+
+/* 游戏部分背景框*/
+.gamebox {
+  height: 66000px;
+  margin-top: 25px;
+  position: relative;
+  left: 60px;
+  background-image: url(../images/gamebox.png);
+  background-attachment: fixed;
+  background-size: 50%;
+  background-color: rgba(255, 255, 255, 0.575);
+  width: 1500px;
+  z-index: 1;
+  box-shadow: 0px 0px 0px 10px rgba(190, 91, 10, 0) inset;
+  border: 5px solid rgb(117, 117, 117);
+}
+
+.gameboxcontent>div {
+  position: absolute;
+  width: 100%;
+}
+
+.introduction {
+  top: 1800px;
+  height: 1300px;
+}
+
+.work {
+  top: 4500px;
+  height: 2000px;
+}
+
+.introduction h1 {
+  text-align: center;
+  font-size: 100PX;
+  color: #e46669;
+  font-weight: 700;
+  font-family: 'Showcard Gothic', 'Berlin Sans FB Demi', 'Noto Sans SC', Courier, monospace;
+  text-decoration: blink;
+  text-shadow: 10px 10px #7e1666;
+}
+
+.introduction P {
+  text-align: center;
+  font-size: 30px;
+}
+
+/* 游戏部分背景框底部*/
+.gameboxbottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 1690px;
+  height: 60px;
+  z-index: 4
+}
+
+.gameboxbottom>div {
+  position: absolute;
+}
+
+.triangle-left,
+.triangle-right {
+  width: 0;
+  height: 0;
+  border: 45px solid transparent;
+}
+
+.triangle-left {
+  left: 16px;
+  top: 15px;
+  border-top-color: rgb(117, 117, 117);
+  transform: rotate(-45deg);
+  transform-origin: center;
+
+}
+
+.rectangle {
+  width: 1560px;
+  height: 100%;
+  left: 60px;
+  background-color: rgb(117, 117, 117);
+  box-shadow: 0px -5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.triangle-right {
+  left: 1570px;
+  top: 15px;
+  border-top-color: rgb(117, 117, 117);
+  transform: rotate(45deg);
+  transform-origin: center;
+
+}
+
+.rectangle>div {
+  height: 100px;
+  width: 120px;
+  position: absolute;
+  bottom: -35px;
+  background-position: 0px -5px;
+  background-size: 90% 110%;
+  line-height: 20px;
+  padding-left: 30px;
+  padding-top: 50px;
+  background-repeat: no-repeat;
+  font-family: 'Noto Sans SC', Courier, monospace;
+  font-weight: 700;
+  font-size: 18px;
+
+}
+
+#redbutton {
+  left: 200px;
+  background-image: url(../images/kadai1.png);
+}
+
+#yellowbutton {
+  left: 500px;
+  background-image: url(../images/kadai2.png);
+}
+
+#greenbutton {
+  left: 800px;
+  background-image: url(../images/kadai3.png);
+}
+
+#purplebutton {
+  left: 1100px;
+  background-image: url(../images/kadai4.png);
+}
+
+/*-------------------简介内-----------------*/
+.inner {
+  position: absolute;
+  background-color: #000000;
+  top: 3800px;
+  left: 110px;
+  color: #ffffff;
+
+}
+
+.qqb {
+  position: absolute;
+  top: 350px;
+  left: 50px;
+  height: 10px;
+  width: 200px;
+  background-color: rgb(0, 0, 0);
+}
+
+.qqbb {
+  position: absolute;
+  top: 330px;
+  left: 120px;
+  border: 30px solid transparent;
+  border-top-color: rgb(0, 0, 0);
+  transform: rotate(180deg);
+  transform-origin: center;
+}
+
+.tx1 {
+  position: absolute;
+  top: 290px;
+  left: 210px;
+  letter-spacing: 2px;
+}
+
+.tx2 {
+  position: absolute;
+  top: 200px;
+  left: 280px;
+}
+
+.tx3 {
+  position: absolute;
+  top: 200px;
+  left: 350px;
+  font-size: 25px;
+  line-height: 30px;
+  letter-spacing: 8px;
+}
+
+.outtree {
+  margin-left: 50px;
+  margin-top: 150px;
+}
+
+.tree {
+  height: 500px;
+  width: 480px;
+  float: left;
+  background-size: 90% 100%;
+  background-repeat: no-repeat;
+  background-position-y: -15px;
+  overflow: hidden;
+  color: rgb(241, 61, 61);
+  text-shadow: 2px 2px #000000;
+  font-size: 24px;
+}
+
+.tree1 {
+  background-image: url(../images/tree1-0.gif);
+}
+
+.tree2 {
+  background-image: url(../images/tree2-0.gif);
+}
+
+.tree3 {
+  background-image: url(../images/tree3-0.gif);
+}
+
+.tree li {
+  position: absolute;
+  top: -200px;
+  visibility: hidden;
+}
+
+.tree div {
+  height: 20px;
+  width: 100px;
+  background-image: url(../images/apple.png);
+  background-size: 20px;
+}
+
+#tr22 div,
+#tr31 div,
+#tr32 div {
+  width: 80px;
+}
+
+#tr11 {
+  left: 135px;
+}
+
+#tr12 {
+  left: 0px;
+}
+
+#tr13 {
+  left: 300px;
+}
+
+#tr21 {
+  left: 35px;
+}
+
+#tr22 {
+  left: 65px;
+}
+
+#tr23 {
+  left: 310px;
+}
+
+#tr24 {
+  left: 255px;
+}
+
+#tr31 {
+  left: 30px;
+}
+
+#tr32 {
+  left: 320px;
+}
+
+#tr33 {
+  left: 150px;
+}
+
+.skill {
+  position: absolute;
+  top: 1100px;
+  width: 1800px;
+  left: -120px;
+}
+
+.skill li {
+  float: left;
+  width: 300px;
+  margin-left: 200px;
+  font-size: 40px;
+  text-align: center;
+  color: #000000;
+  letter-spacing: 5px;
+}
+
+.fan {
+  position: absolute;
+  top: 1300px;
+  left: 100px;
+  height: 10px;
+  width: 50px;
+  background-color: #000000;
+}
+
+.fanbox li {
+  position: absolute;
+  top: 1300px;
+}
+
+.tx4 {
+  left: 450px;
+  font-size: 25px;
+  letter-spacing: 2px;
+  line-height: 60px;
+}
+
+.tx5 {
+  left: 520px;
+  letter-spacing: 2px;
+  font-size: 25px;
+  line-height: 30px;
+}
+
+.tx6 {
+  left: 1000px;
+  letter-spacing: 5px;
+  font-size: 25px;
+  line-height: 30px;
+}
+
+.content {
+  position: absolute;
+  top: 1400px;
+  left: 50%;
+  width: 1000px;
+  margin-left: -500px;
+}
+
+.content li,
+.content div {
+  height: 400px;
+  width: 400px;
+}
+
+.content li {
+  float: left;
+  margin: 30px 50px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 10px 10px 10px #00000080 inset;
+  background-image: url(../images/texture2.png);
+  background-size: 50%;
+}
+
+.content li:nth-of-type(1) {
+  background-color: #ff7e7e;
+  color: #91261f;
+
+}
+
+.content li:nth-of-type(2) {
+  background-color: #ffb835;
+  color: #aa590e;
+
+}
+
+.content li:nth-of-type(3) {
+  background-color: #61ad5a;
+  background-image: url(../images/gmtk.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position-y: 100px;
+  color: #08610d;
+}
+
+.content li:nth-of-type(4) {
+  background-color: #8b6ea3;
+  color: #743b73;
+}
+
+.window {
+  font-size: 40px;
+  text-align: center;
+  line-height: 300px;
+  text-shadow: 1px 1px #181313;
+  font-weight: 700;
+  line-height: 180px;
+
+}
+
+.window>div {
+  position: absolute;
+  top: -500px;
+  background-image: url(../images/me2.gif);
+  background-size: 22%;
+  background-repeat: no-repeat;
+}
+
+.window span {
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  height: 60px;
+  width: 60px;
+  font-size: 20PX;
+}
+
+/*work1*/
+.window #span3 {
+  top: 10px;
+  left: 30px;
+}
+
+.window #span1 {
+  top: 200px;
+  left: 100px;
+
+}
+
+.window #span2 {
+  top: 200px;
+  left: 170px;
+}
+
+/*work2*/
+.window #span11 {
+  top: 280px;
+  left: 190px
+}
+
+.window #span12 {
+  top: 10px;
+  left: 260px
+}
+
+.window #span10 {
+  top: 280px;
+  left: 330px
+}
+
+/*work3*/
+
+.window #span5 {
+  top: 150px;
+  left: 170px;
+  font-size: 22px;
+  letter-spacing: 2px;
+  line-height: 60px;
+}
+
+.window #span6 {
+  top: 10px;
+  left: 240px;
+  font-size: 22px;
+  letter-spacing: 2px;
+  line-height: 60px;
+}
+
+.window #span4 {
+  top: 150px;
+  left: 310px;
+  font-size: 24px;
+  letter-spacing: 3px;
+  line-height: 60px;
+}
+
+/*work4*/
+.window #span7 {
+  top: 300px;
+  left: 30px;
+}
+
+.window #span8 {
+  top: 300px;
+  left: 100px;
+}
+
+.window #span9 {
+  top: 10px;
+  left: 170px;
+}
+
+
+
+
+
+.door div {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+
+}
+
+#door1 {
+  background-position: 10px 80px;
+}
+
+#door2 {
+  background-position: 240px 160px;
+}
+
+#door3 {
+  background-position: 230px 40px;
+}
+
+#door4 {
+  background-position: 150px 180px;
+}
+
+#door1 div {
+  left: 30px;
+  top: 200px;
+
+}
+
+#door2 div {
+  left: 260px;
+  top: 280px;
+
+}
+
+#door3 div {
+  left: 240px;
+  top: 150px;
+  font-size: 22px;
+  letter-spacing: 2px;
+  line-height: 60px;
+}
+
+#door4 div {
+  left: 170px;
+  top: 300px;
+
+}
+
+.tube {
+  width: 90px;
+  height: 100px;
+  background-image: url("../images/tube.png");
+  background-size: 95%;
+  background-repeat: no-repeat;
+}
+
+#tube1 {
+  position: absolute;
+  top: 140px;
+  left: 107px;
+}
+
+#tube2 {
+  position: fixed;
+  bottom: 50px;
+  left: 115px;
+  visibility: hidden;
+}
+
+#me span {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  background-image: url("../images/me1.gif");
+  background-size: 95%;
+  background-repeat: no-repeat;
+  top: 50%;
+  left: 50%;
+  margin-top: -60px;
+  margin-left: -50px;
+}
+
+.fanimg {
+  position: absolute;
+  height: 150px;
+  width: 1500px;
+  background-image: url("../images/fan.png");
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  top: 1230px;
+  left: 60px
+}
+
+.pict {
+  height: 210px;
+  width: 210px;
+  position: absolute;
+  left: 1200px;
+  top: 150px;
+  border-color: rgb(156, 54, 31);
+  border-style: solid;
+  border-width: 15PX;
+  box-shadow: 10px 10px #2e00139d;
+}
+
+/*-------------------作品1-------------------*/
+.innerbox>span {
+  position: fixed;
+  top: 140px;
+  left: 60px;
+  height: 500px;
+  width: 1500px;
+  border: 5px solid rgb(117, 117, 117);
+  background-image: url(../images/texture.png);
+  background-size: 30%;
+}
+
+#innerbox1 {
+  background-color: #ff7e7e;
+}
+
+#innerbox2 {
+  background-color: #f0c467;
+}
+
+#innerbox3 {
+  background-color: #79c772;
+}
+
+#innerbox4 {
+  background-color: #a5618e;
+}
+
+
+/*----------------装饰-----START------------*/
+#start span {
+  background-color: rgb(50, 50, 50);
+  float: left;
+  height: 320px;
+  width: 320px;
+  border-radius: 5%;
+  margin-left: 50px;
+  background-image: url(../images/texture.png);
+}
+
+#start {
+  width: 1500px;
+  height: 320px;
+  left: 50%;
+  margin-left: -750px;
+  padding-left: 205px;
+  position: relative;
+  font-size: 30px;
+  color: #000000;
+  text-align: center;
+  margin-top: 450px;
+  line-height: 320px;
+  letter-spacing: 15px;
+}
+
+/*start提示语*/
+
+.build {
+  position: absolute;
+  left: 2700px;
+  height: 600px;
+  width: 500px;
+  background-color: #ffffff;
+}
+
+.end {
+  position: absolute;
+  left: 5700px;
+  height: 600px;
+  width: 500px;
+  background-color: #ffffff;
+}
+
+.video1 {
+  width: 640px;
+  height: 360px;
+}
+
+.button1 {
+  position: absolute;
+  left: 270px;
+  top: 40px;
+  margin-left: 320px;
+  padding-left: 10px;
+  width: 80px;
+  height: 80px;
+  background-color: rgb(0, 75, 6);
+  border-style: none;
+  border-radius: 15%;
+  font-family: 'Noto Sans SC', Courier, monospace;
+  font-size: 30px;
+  font-weight: 700;
+  color: #79c772;
+  letter-spacing: 10px;
+  line-height: 35PX;
+  box-shadow: 5PX 5PX 3PX rgba(0, 0, 0, 0.7);
+}
+
+#innerbox3 span:nth-of-type(1) {
+  font-size: 33px;
+  position: absolute;
+  top: 40px;
+  left: 35px;
+  height: 100px;
+  width: 500px;
+  border-style: none;
+}
+
+#innerbox3 span:nth-of-type(2) {
+  font-size: 25px;
+  font-weight: 700;
+  position: absolute;
+  top: 40px;
+  left: 800px;
+  height: 600px;
+  width: 600px;
+  border-style: none;
+  text-align: left;
+}
+
+#innerbox3 span:nth-of-type(3) {
+  position: absolute;
+  top: 180px;
+  left: 50px;
+  width: 640px;
+  height: 360px;
+  border-style: none;
+}
+
+#innerbox3 span:nth-of-type(3) div {
+  box-shadow: 10px 10px 10px black inset;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-style: none;
+}
+
+#innerbox4 video {
+  height: 270px;
+  width: 540px;
+}
+
+#innerbox4 span:nth-of-type(1) {
+  position: absolute;
+  top: 90px;
+  left: 50px;
+  width: 540px;
+  height: 270px;
+  border-style: none;
+}
+
+#innerbox4 span:nth-of-type(1) div {
+  box-shadow: 10px 10px 10px black inset;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-style: none;
+}
+
+#innerbox4 span:nth-of-type(2) {
+  position: absolute;
+  top: 400px;
+  left: 50px;
+  width: 540px;
+  height: 260px;
+  border-style: none;
+}
+
+#innerbox4 span:nth-of-type(2) div {
+  box-shadow: 10px 10px 10px black inset;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-style: none;
+}
