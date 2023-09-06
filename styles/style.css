@@ -562,6 +562,10 @@ li {
 .content li:nth-of-type(4) {
   background-color: #8b6ea3;
   color: #743b73;
+  background-image: url(../images/concert.png);
+  background-size: 210%;
+  background-repeat: no-repeat;
+  background-position-x: -250px;
 }
 
 .window {
@@ -659,11 +663,15 @@ li {
 .window #span8 {
   top: 300px;
   left: 100px;
+  line-height: 60px;
+  letter-spacing: 2px
 }
 
 .window #span9 {
   top: 10px;
   left: 170px;
+  line-height: 30px;
+  letter-spacing: 2px
 }
 
 
@@ -716,7 +724,9 @@ li {
 #door4 div {
   left: 170px;
   top: 300px;
-
+  font-size: 18px;
+  line-height: 30px;
+  letter-spacing: 2px
 }
 
 .tube {
@@ -849,9 +859,8 @@ li {
   background-color: #ffffff;
 }
 
-
-
-.button1 {
+.button1,
+.buttonred {
   position: absolute;
   left: 270px;
   top: 40px;
@@ -859,16 +868,24 @@ li {
   padding-left: 10px;
   width: 80px;
   height: 80px;
-  background-color: rgb(0, 75, 6);
   border-style: none;
   border-radius: 15%;
   font-family: 'Noto Sans SC', Courier, monospace;
   font-size: 30px;
   font-weight: 700;
-  color: #79c772;
   letter-spacing: 10px;
   line-height: 35PX;
   box-shadow: 5PX 5PX 3PX rgba(0, 0, 0, 0.7);
+}
+
+.button1 {
+  background-color: rgb(0, 75, 6);
+  color: #79c772;
+}
+
+.buttonred {
+  background-color: rgb(126, 6, 6);
+  color: #ff7e7e;
 }
 
 #innerbox3 span:nth-of-type(1) {

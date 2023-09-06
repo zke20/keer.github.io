@@ -1,0 +1,53 @@
+body {
+    background-color: black;
+}
+
+.bg,
+.tele {
+    position: fixed;
+    top: 50px;
+    left: 50px;
+    height: 751px;
+    background-repeat: no-repeat;
+}
+
+.bg {
+    width: 1441px;
+    overflow: hidden;
+}
+
+.scr {
+    position: absolute;
+    height: 751px;
+    width: 1900px;
+    background-image: url(../redimage/background1.png);
+    background-size: 1900px 751px;
+}
+
+.tele {
+    width: 1442px;
+    background-image: url(../redimage/background2.png);
+    background-size: contain;
+}
+
+.leftarray,
+.rightarray {
+    position: absolute;
+    top: 385px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 25px solid;
+    border-top-color: rgb(255, 39, 39);
+    transform-origin: center;
+}
+
+.leftarray {
+    transform: rotate(90deg);
+    margin-left: -745px;
+}
+
+.rightarray {
+    transform: rotate(-90deg);
+    margin-left: 695px;
+}
