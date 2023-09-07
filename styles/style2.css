@@ -6,14 +6,19 @@ body {
 .tele {
     position: fixed;
     top: 50px;
-    left: 50px;
+    left: 20px;
     height: 751px;
     background-repeat: no-repeat;
 }
 
 .bg {
-    width: 1441px;
+    width: 740px;
     overflow: hidden;
+}
+
+#b2 {
+    left: 1150px;
+    width: 700px;
 }
 
 .scr {
@@ -21,17 +26,21 @@ body {
     height: 751px;
     width: 1900px;
     background-image: url(../redimage/background1.png);
-    background-size: 1900px 751px;
+    background-size: 1900px 740px;
+    transition-duration: 0.5s;
+}
+
+#bg2 {
+    background-position-x: -730px;
 }
 
 .tele {
-    width: 1442px;
+    width: 1856px;
     background-image: url(../redimage/background2.png);
     background-size: contain;
 }
 
-.leftarray,
-.rightarray {
+.tele div {
     position: absolute;
     top: 385px;
     left: 50%;
@@ -44,10 +53,37 @@ body {
 
 .leftarray {
     transform: rotate(90deg);
-    margin-left: -745px;
+    margin-left: -955px;
 }
 
 .rightarray {
     transform: rotate(-90deg);
-    margin-left: 695px;
+    margin-left: 905px;
+}
+
+.yadang {
+    position: fixed;
+    top: 50px;
+    left: 725px;
+    height: 951px;
+    width: 450px;
+    background-repeat: no-repeat;
+    background-image: url(../redimage/yadang2.png);
+    background-size: 100%;
+    background-position-y: -115px;
+    transition-duration: 1s;
+    z-index: 0;
+}
+
+.apple {
+    position: fixed;
+    top: 900px;
+    left: 980px;
+    height: 50px;
+    width: 50px;
+    background-image: url(../redimage/apple1.png);
+    z-index: 1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition-timing-function: ease-in;
 }
