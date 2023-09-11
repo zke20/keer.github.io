@@ -2,6 +2,10 @@ body {
     background-color: black;
 }
 
+li {
+    list-style-type: none;
+}
+
 .bg,
 .tele {
     position: fixed;
@@ -40,10 +44,9 @@ body {
     background-size: contain;
 }
 
-.tele div {
-    position: absolute;
+.array {
+    position: fixed;
     top: 385px;
-    left: 50%;
     width: 0;
     height: 0;
     border: 25px solid;
@@ -53,12 +56,12 @@ body {
 
 .leftarray {
     transform: rotate(90deg);
-    margin-left: -955px;
+    left: -15px;
 }
 
 .rightarray {
     transform: rotate(-90deg);
-    margin-left: 905px;
+    left: 1860px;
 }
 
 .yadang {
@@ -86,4 +89,181 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     transition-timing-function: ease-in;
+}
+
+.clue1 {
+    position: absolute;
+    background-color: #ffe1e1;
+    border-radius: 25%;
+    border: 3px solid rgb(165, 10, 10);
+    box-shadow: 2px 2px 8px #00000060;
+    transform-origin: bottom;
+}
+
+.scrclue1,
+.scrclue2 {
+    position: absolute;
+    transition-duration: 0.5s;
+}
+
+.scrclue1 {
+    left: 0;
+}
+
+.scrclue2 {
+    left: 0;
+}
+
+#clue1-1 {
+    height: 30px;
+    width: 150px;
+    left: 155px;
+    top: 420px;
+    font-size: 2px;
+    line-height: 30px;
+}
+
+#clue1-2 {
+    height: 40px;
+    width: 120px;
+    left: 610px;
+    top: 655px;
+}
+
+#clue1-3 {
+    height: 40px;
+    width: 80px;
+    left: 1050px;
+    top: 650px;
+}
+
+#clue1-4 {
+    height: 40px;
+    width: 120px;
+    left: -90px;
+    top: 655px;
+}
+
+#clue1-5 {
+    height: 40px;
+    width: 80px;
+    left: 320px;
+    top: 650px;
+}
+
+#clue1-6 {
+    height: 100px;
+    width: 80px;
+    left: 1000px;
+    top: 280px;
+}
+
+.scr1 {
+    position: absolute;
+    height: 700px;
+    width: 690px;
+    top: 70px;
+    left: 50px;
+    border-radius: 10%;
+    overflow: hidden;
+}
+
+.scr2 {
+    position: absolute;
+    height: 700px;
+    width: 690px;
+    top: 70px;
+    left: 1150px;
+    border-radius: 10%;
+    overflow: hidden;
+}
+
+ul {
+    position: relative;
+    padding: 0;
+}
+
+#clue1-1 li {
+    float: left;
+}
+
+#clue1-1 li:nth-of-type(1) {
+    rotate: 15deg;
+}
+
+#clue1-1 li:nth-of-type(2) {
+    rotate: -5deg;
+}
+
+#clue1-1 li:nth-of-type(3) {
+    rotate: 20deg;
+}
+
+#clue1-1 li:nth-of-type(4) {
+    rotate: -15deg;
+}
+
+#clue1-1 li:nth-of-type(5) {
+    rotate: 8deg;
+}
+
+.tool {
+    position: fixed;
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    background-color: #ebd8d8;
+    top: 790px;
+    left: 90px;
+    margin-right: 50px;
+    border-radius: 10%;
+    box-shadow: 10px 10px 10px rgb(0, 0, 0) inset;
+    font-size: 60px;
+    text-align: center;
+    line-height: 100px;
+    color: red;
+}
+
+body span:nth-of-type(2) {
+    left: 230px;
+    background-color: black;
+}
+
+body span:nth-of-type(3) {
+    left: 370px;
+    background-color: black;
+}
+
+body span:nth-of-type(4) {
+    left: 510px;
+}
+
+body span:nth-of-type(5) {
+    left: 1250px;
+    background-color: black;
+}
+
+body span:nth-of-type(6) {
+    left: 1390px;
+}
+
+body span:nth-of-type(7) {
+    left: 1530px;
+}
+
+body span:nth-of-type(8) {
+    left: 1670px;
+    background-color: black;
+}
+
+.tool div {
+    height: 50px;
+    width: 70px;
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    background-color: #ffe1e1;
+    border-radius: 25%;
+    border: 3px solid rgb(165, 10, 10);
+    visibility: hidden;
 }
