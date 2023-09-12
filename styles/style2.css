@@ -98,6 +98,7 @@ li {
     border: 3px solid rgb(165, 10, 10);
     box-shadow: 2px 2px 8px #00000060;
     transform-origin: bottom;
+    font-size: 2px;
 }
 
 .scrclue1,
@@ -115,22 +116,81 @@ li {
 }
 
 #clue1-1 {
-    height: 30px;
+    height: 70px;
     width: 150px;
-    left: 155px;
-    top: 420px;
-    font-size: 2px;
+    left: 515px;
+    top: 230px;
+
     line-height: 30px;
 }
 
+/*#clue1-1 {
+    height: 70px;
+    width: 150px;
+    left: 500px;
+    top: 90px;
+
+    line-height: 30px;
+}*/
 #clue1-2 {
+    height: 60px;
+    width: 120px;
+    left: 210px;
+    top: 375px;
+}
+
+/*#clue1-2 {
     height: 40px;
     width: 120px;
     left: 610px;
     top: 655px;
+}*/
+.dav {
+    padding-left: 5px;
+
+    line-height: 15px;
+}
+
+.venu {
+    padding-left: 5px;
+
+    line-height: 15px;
+}
+
+.pic2 {
+    padding-left: 5px;
+    line-height: 20px;
 }
 
 #clue1-3 {
+    height: 40px;
+    width: 80px;
+    left: 1690px;
+    top: 570px;
+}
+
+#clue1-4 {
+    height: 40px;
+    width: 120px;
+    left: -490px;
+    top: 415px;
+}
+
+#clue1-5 {
+    height: 60px;
+    width: 80px;
+    left: 935px;
+    top: 560px;
+}
+
+#clue1-6 {
+    height: 100px;
+    width: 110px;
+    left: 750px;
+    top: 160px;
+}
+
+/*#clue1-3 {
     height: 40px;
     width: 80px;
     left: 1050px;
@@ -156,8 +216,7 @@ li {
     width: 80px;
     left: 1000px;
     top: 280px;
-}
-
+}*/
 .scr1 {
     position: absolute;
     height: 700px;
@@ -183,28 +242,50 @@ ul {
     padding: 0;
 }
 
-#clue1-1 li {
+.clue1 li {
     float: left;
 }
 
-#clue1-1 li:nth-of-type(1) {
+#clue1-1 li:nth-of-type(1),
+.dav li:nth-of-type(2),
+.pic2 li:nth-of-type(5) {
     rotate: 15deg;
 }
 
-#clue1-1 li:nth-of-type(2) {
+#clue1-1 li:nth-of-type(2),
+.dav li:nth-of-type(1),
+.venu li:nth-of-type(4),
+.pic2 li:nth-of-type(1),
+.pic2 li:nth-of-type(6) {
     rotate: -5deg;
 }
 
-#clue1-1 li:nth-of-type(3) {
+#clue1-1 li:nth-of-type(3),
+.dav li:nth-of-type(4),
+.venu li:nth-of-type(3),
+.pic2 li:nth-of-type(2) {
     rotate: 20deg;
 }
 
-#clue1-1 li:nth-of-type(4) {
+#clue1-1 li:nth-of-type(4),
+.dav li:nth-of-type(3),
+.venu li:nth-of-type(2),
+.pic2 li:nth-of-type(3),
+.pic2 li:nth-of-type(8) {
     rotate: -15deg;
 }
 
-#clue1-1 li:nth-of-type(5) {
+#clue1-1 li:nth-of-type(5),
+.venu li:nth-of-type(1),
+.pic2 li:nth-of-type(4),
+.pic2 li:nth-of-type(7) {
     rotate: 8deg;
+}
+
+.clue1 span {
+    position: absolute;
+    left: 7px;
+    visibility: hidden;
 }
 
 .tool {
@@ -212,7 +293,7 @@ ul {
     display: inline-block;
     height: 100px;
     width: 100px;
-    background-color: #ebd8d8;
+    background-color: #4b4b4b;
     top: 790px;
     left: 90px;
     margin-right: 50px;
@@ -257,13 +338,121 @@ body span:nth-of-type(8) {
 }
 
 .tool div {
-    height: 50px;
+    height: 60px;
     width: 70px;
     position: absolute;
     top: 20px;
     left: 15px;
-    background-color: #ffe1e1;
-    border-radius: 25%;
-    border: 3px solid rgb(165, 10, 10);
+    background-color: #f8e1cc;
+    border-radius: 15%;
+    border: 5px solid #321a03;
     visibility: hidden;
+    font-size: 3px;
+    line-height: 20px;
+    color: black;
+    overflow: hidden;
+    padding-top: 5px;
+    font-weight: 700;
+}
+
+.blk {
+    position: absolute;
+    background-color: black;
+}
+
+.scr1 .blk1 {
+    top: 140px;
+    left: 165px;
+    height: 30px;
+    width: 120px;
+}
+
+.scr1 .blk2 {
+    top: 270px;
+    left: 170px;
+    height: 30px;
+    width: 50px;
+}
+
+.scr1 .blk3 {
+    top: 400px;
+    left: 600px;
+    height: 30px;
+    width: 60px;
+}
+
+.scr1 .blk4 {
+    top: 440px;
+    left: 970px;
+    height: 30px;
+    width: 110px;
+}
+
+.scr1 .blk5 {
+    top: 540px;
+    left: 1020px;
+    height: 30px;
+    width: 40px;
+}
+
+
+
+.scr2 .blk6 {
+    top: 440px;
+    left: 270px;
+    height: 30px;
+    width: 110px;
+}
+
+.scr2 .blk7 {
+    top: 540px;
+    left: 320px;
+    height: 30px;
+    width: 40px;
+}
+
+.scr2 .blk8 {
+    top: 340px;
+    left: 790px;
+    height: 30px;
+    width: 70px;
+}
+
+.scr2 .blk9 {
+    top: 440px;
+    left: 790px;
+    height: 30px;
+    width: 70px;
+}
+
+.picture {
+    position: absolute;
+    background-image: url(../redimage/picture1.png);
+    background-size: 1900px 740px;
+}
+
+.picture1 {
+    height: 410px;
+    width: 300px;
+    left: 65px;
+    top: 20px;
+    background-position: -98px -40px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+.picture2 {
+    height: 680px;
+    width: 300px;
+    left: 530px;
+    top: 18px;
+    background-position: -560px -40px;
+}
+
+.picture3 {
+    height: 450px;
+    width: 310px;
+    left: 710px;
+    top: 165px;
+    background-position: -1442px -185px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
 }
