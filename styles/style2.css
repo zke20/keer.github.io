@@ -6,6 +6,10 @@ li {
     list-style-type: none;
 }
 
+em {
+    font-weight: 700;
+}
+
 .bg,
 .tele {
     position: fixed;
@@ -120,31 +124,25 @@ li {
     width: 150px;
     left: 515px;
     top: 230px;
-
-    line-height: 30px;
+    line-height: 60px;
 }
 
-/*#clue1-1 {
-    height: 70px;
-    width: 150px;
-    left: 500px;
-    top: 90px;
+#clue1-1 span {
+    line-height: 20px;
+}
 
-    line-height: 30px;
-}*/
 #clue1-2 {
     height: 60px;
     width: 120px;
     left: 210px;
     top: 375px;
+    line-height: 30px;
 }
 
-/*#clue1-2 {
-    height: 40px;
-    width: 120px;
-    left: 610px;
-    top: 655px;
-}*/
+#clue1-2 span {
+    line-height: 18px;
+}
+
 .dav {
     padding-left: 5px;
 
@@ -190,33 +188,6 @@ li {
     top: 160px;
 }
 
-/*#clue1-3 {
-    height: 40px;
-    width: 80px;
-    left: 1050px;
-    top: 650px;
-}
-
-#clue1-4 {
-    height: 40px;
-    width: 120px;
-    left: -90px;
-    top: 655px;
-}
-
-#clue1-5 {
-    height: 40px;
-    width: 80px;
-    left: 320px;
-    top: 650px;
-}
-
-#clue1-6 {
-    height: 100px;
-    width: 80px;
-    left: 1000px;
-    top: 280px;
-}*/
 .scr1 {
     position: absolute;
     height: 700px;
@@ -246,13 +217,13 @@ ul {
     float: left;
 }
 
-#clue1-1 li:nth-of-type(1),
+.pic1 li:nth-of-type(1),
 .dav li:nth-of-type(2),
 .pic2 li:nth-of-type(5) {
     rotate: 15deg;
 }
 
-#clue1-1 li:nth-of-type(2),
+.pic1 li:nth-of-type(2),
 .dav li:nth-of-type(1),
 .venu li:nth-of-type(4),
 .pic2 li:nth-of-type(1),
@@ -260,14 +231,14 @@ ul {
     rotate: -5deg;
 }
 
-#clue1-1 li:nth-of-type(3),
+.pic1 li:nth-of-type(3),
 .dav li:nth-of-type(4),
 .venu li:nth-of-type(3),
 .pic2 li:nth-of-type(2) {
     rotate: 20deg;
 }
 
-#clue1-1 li:nth-of-type(4),
+.pic1 li:nth-of-type(4),
 .dav li:nth-of-type(3),
 .venu li:nth-of-type(2),
 .pic2 li:nth-of-type(3),
@@ -275,7 +246,7 @@ ul {
     rotate: -15deg;
 }
 
-#clue1-1 li:nth-of-type(5),
+.pic1 li:nth-of-type(5),
 .venu li:nth-of-type(1),
 .pic2 li:nth-of-type(4),
 .pic2 li:nth-of-type(7) {
@@ -286,6 +257,7 @@ ul {
     position: absolute;
     left: 7px;
     visibility: hidden;
+
 }
 
 .tool {
@@ -302,37 +274,48 @@ ul {
     font-size: 60px;
     text-align: center;
     line-height: 100px;
-    color: red;
+    color: rgba(255, 0, 0, 0);
+
 }
 
-body span:nth-of-type(2) {
+/* .tools span:nth-of-type(1),
+.tools span:nth-of-type(4),
+.tools span:nth-of-type(6),
+.tools span:nth-of-type(7) {
+    border: 1px solid rgb(202, 202, 202)
+} */
+.tools span:nth-of-type(1) {
+    left: 1530px;
+
+}
+
+.tools span:nth-of-type(2) {
     left: 230px;
     background-color: black;
 }
 
-body span:nth-of-type(3) {
+.tools span:nth-of-type(3) {
     left: 370px;
     background-color: black;
 }
 
-body span:nth-of-type(4) {
-    left: 510px;
+.tools span:nth-of-type(4) {
+    left: 1390px;
+
 }
 
-body span:nth-of-type(5) {
+.tools span:nth-of-type(5) {
     left: 1250px;
     background-color: black;
 }
 
-body span:nth-of-type(6) {
-    left: 1390px;
+.tools span:nth-of-type(6) {
+    left: 510px;
 }
 
-body span:nth-of-type(7) {
-    left: 1530px;
-}
 
-body span:nth-of-type(8) {
+
+.tools span:nth-of-type(8) {
     left: 1670px;
     background-color: black;
 }
@@ -343,11 +326,11 @@ body span:nth-of-type(8) {
     position: absolute;
     top: 20px;
     left: 15px;
-    background-color: #f8e1cc;
+    background-color: #e26d63;
     border-radius: 15%;
-    border: 5px solid #321a03;
+    border: 5px solid #93190f;
     visibility: hidden;
-    font-size: 3px;
+    font-size: 38px;
     line-height: 20px;
     color: black;
     overflow: hidden;
@@ -455,4 +438,49 @@ body span:nth-of-type(8) {
     top: 165px;
     background-position: -1442px -185px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+.board {
+    position: absolute;
+    visibility: hidden;
+    border-radius: 15%;
+    border-style: solid;
+    border-width: 5px;
+    background-color: #ffe1e1;
+    border: 5px solid rgb(165, 10, 10);
+}
+
+.board1 {
+    left: 140px;
+    top: 430px;
+    height: 40px;
+    width: 150px;
+}
+
+.board2 {
+    height: 40px;
+    width: 120px;
+    left: 610px;
+    top: 650px;
+}
+
+.board3 {
+    height: 40px;
+    width: 100px;
+    left: 1020px;
+    top: 650px;
+}
+
+.board4 {
+    height: 40px;
+    width: 100px;
+    left: 320px;
+    top: 650px;
+}
+
+.board5 {
+    height: 100px;
+    width: 80px;
+    left: 1000px;
+    top: 550px;
 }

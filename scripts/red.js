@@ -98,7 +98,7 @@ right.addEventListener('click', function () {//按钮箭头注册事件
 
 var yadang = document.querySelector('.yadang');
 var apple = document.querySelector('.apple');
-
+var boards = document.querySelectorAll('.board')
 apple.addEventListener('click', function () {//苹果注册事件
     if (apple['offsetTop'] == 900) {
         isred = false
@@ -115,6 +115,11 @@ apple.addEventListener('click', function () {//苹果注册事件
         for (i = 0; i < pictures.length; i++) {
             pictures[i].style.backgroundImage = 'url(../redimage/picture2.png)'
         }
+        for (i = 0; i < boards.length; i++) {
+            boards[i].style.visibility = 'hidden'
+            boards[i].style.borderStyle = 'none'
+            boards[i].style.backgroundColor = '#e26d6300'
+        }
     } else {
         isred = true
         bg1.style.backgroundImage = 'url(../redimage/background1.png)'
@@ -129,6 +134,11 @@ apple.addEventListener('click', function () {//苹果注册事件
         }
         for (i = 0; i < pictures.length; i++) {
             pictures[i].style.backgroundImage = 'url(../redimage/picture1.png)'
+        }
+        for (i = 0; i < boards.length; i++) {
+            boards[i].style.borderStyle = 'solid'
+            boards[i].style.visibility = 'visible'
+            boards[i].style.backgroundColor = '#ffe1e1'
         }
     }
 })
@@ -151,10 +161,15 @@ for (i = 0; i < tls.length; i++) {//给iscollect增添四项
 document.addEventListener('click', function () {//未收集时点击交互状态下点击-还原名牌大小
     if (isclueOpened && isOpened2) {//打开并点过线索后
         for (i = 0; i < clue1.length; i++) {
+            clue1[i].style.zIndex = ' 0'
+            console.log('ok')
+        }
+        for (i = 0; i < clue1.length; i++) {
             if (i <= 2 && !isCollect1[i] || i > 2 && !isCollect1[i - 2]
                 || isCollect1[0] && isCollect1[1] && isCollect1[2] && isCollect1[3]) {
                 //还没有收集对应的或收集完毕
                 clue1[i].style.transform = 'scale(1)'
+                console.log('maopao')
                 isclueOpened = false//回到主界面
                 isOpened2 = false
             }
@@ -171,7 +186,6 @@ document.addEventListener('click', function () {//未收集时点击交互状态
             clue1[i].firstElementChild.style.visibility = 'hidden'
             if (i <= 2 && isCollect1[i] || i > 2 && isCollect1[i - 2]) {
                 clue1[i].lastElementChild.style.visibility = 'hidden'
-
                 if (i == 1 || i == 2) {
                     clue1[i + 2].lastElementChild.style.visibility = 'hidden'
                     //  console.log(clue1[i + 2])
@@ -184,7 +198,6 @@ document.addEventListener('click', function () {//未收集时点击交互状态
                 //  console.log([i, 'ddd'], isCollect1)
                 clue1[i].lastElementChild.style.visibility = 'visible'
             }
-
         }
     }
 
@@ -198,11 +211,11 @@ for (i = 0; i < clue1.length; i++) {
         if (!isred) {
             if (isclueOpened && !isCollect1[i]) {
                 this.style.visibility = 'hidden';
+                console.log('aegrf')
                 if (getk(this) + 1 == 2 || getk(this) + 1 == 3) {
                     // console.log(getk(this) + 1, clue1[getk(this) + 1 + 1].lastElementChild)
                     clue1[getk(this) + 1 + 1].lastElementChild.style.visibility = 'hidden';
                 } else if (getk(this) + 1 == 4 || getk(this) + 1 == 5) {
-
                     clue1[getk(this) - 2].lastElementChild.style.visibility = 'hidden';
                 }
             }
@@ -232,24 +245,24 @@ document.addEventListener('click', function () {//黑色马赛克的可视性
     }
 })
 
-for (i = 0; i < clue1.length; i++) {
-    clue1[i].addEventListener('click', function (e) {
+for (i = 0; i < clue1.length; i++) {//点开后名牌不遮挡
+    clue1[i].addEventListener('click', function () {
         if (isclueOpened && !isOpened2) {
             this.style.zIndex = '2'
-            // e.stopPropagation();
         }
-        else if (isclueOpened && isOpened2) {
-            this.style.zIndex = ' 0'
-
-        }
-
-
     })
 }
+
 document.addEventListener('click', function () {
-    if (isclueOpened && isOpened2) {
+    if (isCollect1[0] && isCollect1[1] && isCollect1[2] && isCollect1[3]) {//全部收集以后关闭盒子
         for (i = 0; i < clue1.length; i++) {
-            clue1[i].style.zIndex = ' 0'
+            clue1[i].style.visibility = 'hidden'
+        }
+        for (j = 0; j < boards.length; j++) {//打开简介盒子
+            boards[j].style.visibility = 'visible'
         }
     }
 })
+for (i = 0; i < boards.length; i++) {
+    scales(boards[i]);
+}
