@@ -10,6 +10,11 @@ em {
     font-weight: 700;
 }
 
+* {
+    cursor: default;
+
+}
+
 .bg,
 .tele {
     position: fixed;
@@ -103,6 +108,7 @@ em {
     box-shadow: 2px 2px 8px #00000060;
     transform-origin: bottom;
     font-size: 2px;
+    transition-duration: 0.2s;
 }
 
 .scrclue1,
@@ -275,6 +281,7 @@ ul {
     text-align: center;
     line-height: 100px;
     color: rgba(255, 0, 0, 0);
+    transition-duration: 0.5s;
 
 }
 
@@ -313,11 +320,18 @@ ul {
     left: 510px;
 }
 
-
-
 .tools span:nth-of-type(8) {
     left: 1670px;
     background-color: black;
+}
+
+.te {
+    visibility: hidden;
+    transition-duration: 1s;
+}
+
+.to {
+    transition-duration: 1s;
 }
 
 .tool div {
@@ -446,8 +460,9 @@ ul {
     border-radius: 15%;
     border-style: solid;
     border-width: 5px;
-    background-color: #ffe1e1;
-    border: 5px solid rgb(165, 10, 10);
+    background-color: #ffe1e136;
+    border: 3px dashed rgb(255, 255, 255);
+    transition-duration: 0.2s;
 }
 
 .board1 {
@@ -483,4 +498,52 @@ ul {
     width: 80px;
     left: 1000px;
     top: 550px;
+}
+
+.grey {
+    width: 1500px;
+    height: 1500px;
+    background-color: #00000000;
+    position: absolute;
+    display: none;
+}
+
+.board div {
+    padding-top: 5px;
+    padding-left: 2px;
+    font-size: 5px;
+    visibility: hidden;
+
+}
+
+.litter {
+    position: absolute;
+    font-size: 40px;
+    color: #000000;
+    text-shadow: 2px 2px 3px rgba(255, 3, 3, 0.712);
+    visibility: hidden;
+}
+
+.lt1 {
+    left: 100px;
+    top: 100px;
+    transform: rotate(15deg);
+}
+
+.lt2 {
+    left: 610px;
+    top: 250px;
+    transform: rotate(-35deg);
+}
+
+.lt3 {
+    left: 450px;
+    top: 650px;
+    transform: rotate(-25deg);
+}
+
+.lt4 {
+    left: 800px;
+    top: 360px;
+    transform: rotate(45deg);
 }
