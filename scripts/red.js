@@ -81,13 +81,16 @@ function distancey(x, y, m, n) {
 }
 function boardstyle(i) {
     boards[i].style.borderStyle = 'solid'
-    boards[i].style.borderColor = 'rgb(165, 10, 10)'
-    boards[i].style.backgroundColor = '#ffe1e1'
+    boards[i].style.borderColor = '#855a0a'
+    boards[i].style.backgroundColor = '#654305'
     boards[i].firstElementChild.style.visibility = 'visible'
     boards[i].removeEventListener('click', isfocus)
     boards[i].removeEventListener('mouseenter', larger)
     boards[i].removeEventListener('mouseleave', backsize)
     isboard[i] = true
+}
+function picstyle(i) {
+    pictures[i].style.backgroundImage = 'url(../redimage/picture2.png)'
 }
 //------------------------------------按钮和苹果交互------------------------------------------------
 var left = document.querySelector('.leftarray');
@@ -147,9 +150,7 @@ apple.addEventListener('click', function () {//苹果注册事件
             clue1[i].style.backgroundColor = '#c6ab93'
             clue1[i].style.borderColor = '#321a03'
         }
-        for (i = 0; i < pictures.length; i++) {
-            pictures[i].style.backgroundImage = 'url(../redimage/picture2.png)'
-        }
+
 
     } else {
         isred = true
@@ -163,9 +164,7 @@ apple.addEventListener('click', function () {//苹果注册事件
             clue1[i].style.backgroundColor = '#ffe1e1'
             clue1[i].style.borderColor = 'rgb(165, 10, 10)'
         }
-        for (i = 0; i < pictures.length; i++) {
-            pictures[i].style.backgroundImage = 'url(../redimage/picture1.png)'
-        }
+
 
     }
 })
@@ -265,7 +264,8 @@ for (i = 0; i < clue1.length; i++) {
 
 }
 var blks = document.querySelectorAll('.blk');
-document.addEventListener('click', function () {//黑色马赛克的可视性
+apple.addEventListener('click', blk)//黑色马赛克的可视性
+function blk() {
     if (isred) {
         for (i = 0; i < blks.length; i++) {
             blks[i].style.visibility = 'visible'
@@ -275,7 +275,10 @@ document.addEventListener('click', function () {//黑色马赛克的可视性
             blks[i].style.visibility = 'hidden'
         }
     }
-})
+    if (clear(isboard)) {
+        this.removeEventListener('click', blk)
+    }
+}
 
 for (i = 0; i < clue1.length; i++) {//点开后名牌不遮挡
     clue1[i].addEventListener('click', function () {
@@ -329,11 +332,18 @@ for (i = 0; i < boards.length; i++) {//拖动盒子到指定简介盒子处并�
                         if (distancex(thistl, boards[a], 100, 200)
                             && distancey(thistl, boards[a], 50, 100)) {
                             thistl.style.visibility = 'hidden'
-
+                            picstyle(a)
                             boardstyle(a)
                             // console.log('success')
                             document.removeEventListener('mousemove', move)
-
+                            switch (a) {
+                                case 0:
+                                    blks[0].style.visibility = 'hidden'
+                                    blks[1].style.visibility = 'hidden'
+                                    break;
+                                default:
+                                    blks[2].style.visibility = 'hidden'
+                            }
                         } else {
                             thistl.style.left = xo + 'px'
                             thistl.style.top = yo + 'px'
@@ -346,9 +356,15 @@ for (i = 0; i < boards.length; i++) {//拖动盒子到指定简介盒子处并�
                             thistl.style.visibility = 'hidden'
                             boardstyle(a);
                             boardstyle(a + 1)
+                            picstyle(a)
+                            picstyle(a + 1)
 
                             // console.log('success')
                             document.removeEventListener('mousemove', move)
+                            blks[3].style.visibility = 'hidden'
+                            blks[4].style.visibility = 'hidden'
+                            blks[5].style.visibility = 'hidden'
+                            blks[6].style.visibility = 'hidden'
                         } else {
                             thistl.style.left = xo + 'px'
                             thistl.style.top = yo + 'px'
@@ -360,8 +376,11 @@ for (i = 0; i < boards.length; i++) {//拖动盒子到指定简介盒子处并�
                             && distancey(thistl, boards[a + 1], 50, 100)) {
                             thistl.style.visibility = 'hidden'
                             boardstyle(a + 1)
+                            picstyle(a + 1)
                             // console.log('success')
                             document.removeEventListener('mousemove', move)
+                            blks[7].style.visibility = 'hidden'
+                            blks[8].style.visibility = 'hidden'
                         } else {
                             thistl.style.left = xo + 'px'
                             thistl.style.top = yo + 'px'
@@ -403,8 +422,8 @@ document.addEventListener('click', function () {//简介盒子样式变化
                 } else {
 
                     boards[i].style.borderStyle = 'solid'
-                    boards[i].style.borderColor = 'rgb(165, 10, 10)'
-                    boards[i].style.backgroundColor = '#ffe1e1'
+                    boards[i].style.borderColor = '#855a0a'
+                    boards[i].style.backgroundColor = '#654305'
                     boards[i].firstElementChild.style.visibility = 'visible'
                 }
             }
@@ -431,20 +450,67 @@ document.addEventListener('click', function () {//清空后出现字母
 var litters = document.querySelectorAll('.litter')
 var tes = document.querySelectorAll('.te');
 var tos = document.querySelectorAll('.to');
+var isliter = [false, false, false, false]
 apple.addEventListener('click', function () {//字母样式变化
     if (clear(isboard)) {
         if (isred) {
             for (i = 0; i < litters.length; i++) {
                 litters[i].style.visibility = 'hidden'
             }
+
         } else {
             for (i = 0; i < litters.length; i++) {
                 console.log('litter')
                 litters[i].style.visibility = 'visible'
             }
         }
+    } else {
+        if (isred) {
+            for (i = 0; i < blks.length; i++) {
+                blks[i].style.visibility = 'visible'
+            }
+
+        } else {
+            for (i = 0; i < blks.length; i++) {
+                blks[i].style.visibility = 'hidden'
+            }
+
+        }
     }
 })
+
+
+apple.addEventListener('click', function () {//picture三个阶段
+    var p = 0
+    for (i = 0; i < isboard.length; i++) {
+        if (i <= 2) {
+            p = i
+        } else {
+            p = i - 1
+        }
+        if (isboard[i] && !isliter[p]) {
+            pictures[i].style.backgroundImage = 'url(../redimage/picture2.png)'
+            console.log('1')
+        } else if (isliter[p]) {
+            if (isred) {
+                pictures[i].style.backgroundImage = 'url(../redimage/picture2.png)'
+                console.log('2')
+            } else {
+                pictures[i].style.backgroundImage = 'url(../redimage/picture1.png)'
+                console.log('3')
+            }
+        } else {
+            if (isred) {
+                pictures[i].style.backgroundImage = 'url(../redimage/picture1.png)'
+                console.log('4')
+            } else {
+                pictures[i].style.backgroundImage = 'url(../redimage/picture2.png)'
+                console.log('5')
+            }
+        }
+    }
+})
+
 for (i = 0; i < litters.length; i++) {//字母放大缩小，点击收集字母
     scales(litters[i])
     litters[i].addEventListener('click', function () {//点击字母事件
@@ -460,18 +526,27 @@ for (i = 0; i < litters.length; i++) {//字母放大缩小，点击收集字母
             case 0:
                 tos[3].innerHTML = 'C'
                 tos[3].style.color = 'rgb(255, 0, 0)'
+                pictures[0].style.backgroundImage = 'url(../redimage/statue.gif)'
+                isliter[0] = true
                 break;
             case 1:
                 tos[2].innerHTML = 'T'
                 tos[2].style.color = 'rgb(255, 0, 0)'
+                pictures[1].style.backgroundImage = 'url(../redimage/statue2.gif)'
+                isliter[1] = true
                 break;
             case 2:
                 tos[1].innerHTML = 'A'
                 tos[1].style.color = 'rgb(255, 0, 0)'
+                pictures[2].style.backgroundImage = 'url(../redimage/statue3.gif)';
+                pictures[3].style.backgroundImage = 'url(../redimage/statue3.gif)'
+                isliter[2] = true
                 break;
             default:
                 tos[0].innerHTML = 'T'
                 tos[0].style.color = 'rgb(255, 0, 0)'
+                pictures[4].style.backgroundImage = 'url(../redimage/statue4.gif)'
+                isliter[3] = true
 
         }
 
@@ -480,7 +555,7 @@ for (i = 0; i < litters.length; i++) {//字母放大缩小，点击收集字母
     })
 }
 
-document.addEventListener('click', function () {
+document.addEventListener('click', function () {//点开后灰色蒙层
     if (isclueOpened) {
         for (i = 0; i < grey.length; i++) {
             grey[i].style.display = 'block'
