@@ -1,5 +1,8 @@
 function animatetop(obj, target, steptime, callback) {
     clearInterval(obj.timer);
+    console.log(target, target * obj.parentElement.offsetHeight, obj.offsetTop)
+    target = target * obj.parentElement.offsetHeight
+
     obj.timer = setInterval(function () {
         var step = (target - obj.offsetTop) / steptime;
         step = step > 0 ? Math.ceil(step) : Math.floor(step);
@@ -37,14 +40,28 @@ function scales(obj) {
     obj.addEventListener('mouseenter', larger);
     obj.addEventListener('mouseleave', backsize);
 }
+
+
+function scalearray(obj, deg) {
+    obj.addEventListener('mouseenter', function () {
+        this.style.transform = 'scale(1.1) rotate(' + deg + 'deg)'
+    });
+    obj.addEventListener('mouseleave', function () {
+        this.style.transform = 'scale(1) rotate(' + deg + 'deg)'
+    });
+}
+
 function cluefocus(obj) {
     obj.addEventListener('click', isfocus)
 }
 function slideleft(obj, x) {
-    obj.style.left = Math.min(0, 230 + x) + 'px';
+    obj.style.left = Math.min(0, x + 50) + '%';
+
 }
 function slideright(obj, x) {
-    obj.style.left = Math.max(-459, -230 + x) + 'px';
+    obj.style.left = Math.max(-85, x - 50) + '%';
+
+
 }
 function getk(ts) {
     for (k = 0; k < clue1.length; k++) {
@@ -90,6 +107,7 @@ function boardstyle(i) {
     isboard[i] = true
 }
 function picstyle(i) {
+    console.log('efdhuedkdfha')
     pictures[i].style.backgroundImage = 'url(../redimage/picture2.png)'
 }
 //------------------------------------按钮和苹果交互------------------------------------------------
@@ -105,47 +123,50 @@ var scrclue2 = document.querySelector('.scrclue2');
 var isred = true
 var pictures = document.querySelectorAll('.picture');
 left.addEventListener('click', function () {//按钮箭头注册事件
-    var x = parseInt(bg1['offsetLeft']);
-    slideleft(bg1, x); slideleft(bg2, x); slideleft(scrclue1, x); slideleft(scrclue2, x);
+    var x = parseInt(bg1['offsetLeft'] / window.innerWidth);
+    slideleft(bg1, x, 0); slideleft(bg2, x, -95);
+    slideleft(scrclue1, x, 0); slideleft(scrclue2, x, 0);
     if (bg1['offsetLeft'] == 0) {
         left.style.borderTopColor = graybt
+        right.style.borderTopColor = redbt
+
     } else {
         left.style.borderTopColor = redbt
-    }
-    if (bg1['offsetLeft'] == -459) {
-        right.style.borderTopColor = graybt
-    } else {
         right.style.borderTopColor = redbt
+
     }
 })
 right.addEventListener('click', function () {//按钮箭头注册事件
-    var x = parseInt(bg1['offsetLeft'])
-    slideright(bg1, x); slideright(bg2, x); slideright(scrclue1, x); slideright(scrclue2, x);
-    if (bg1['offsetLeft'] == 0) {
-        left.style.borderTopColor = graybt
-    } else {
+    var x = parseInt(bg1['offsetLeft'] / window.innerWidth)
+    slideright(bg1, x, 0); slideright(bg2, x, -95);
+    slideright(scrclue1, x, 0); slideright(scrclue2, x, 0);
+    if ((bg1['offsetLeft'] / bg1.parentElement.offsetWidth).toFixed(1) == -0.5) {
         left.style.borderTopColor = redbt
-    }
-    if (bg1['offsetLeft'] == -459) {
         right.style.borderTopColor = graybt
-    } else {
-        right.style.borderTopColor = redbt
-    }
-})
 
+    } else {
+
+        left.style.borderTopColor = redbt
+        right.style.borderTopColor = redbt
+
+    }
+
+})
+scalearray(left, 90);
+scalearray(right, -90);
 var yadang = document.querySelector('.yadang');
 var apple = document.querySelector('.apple');
 var boards = document.querySelectorAll('.board')
 
 apple.addEventListener('click', function () {//苹果注册事件
-    if (apple['offsetTop'] == 900) {
+    if ((apple['offsetTop'] / yadang.offsetHeight).toFixed(1) == 0.9) {
         isred = false
         bg1.style.backgroundImage = 'url(../redimage/background3.png)'
         bg2.style.backgroundImage = 'url(../redimage/background3.png)'
         yadang.style.backgroundImage = 'url(../redimage/yadang.png)'
         apple.style.backgroundImage = 'url(../redimage/apple2.png)'
         apple.style.transform = 'rotate(0deg)'
-        animatetop(apple, 565, 1)
+        animatetop(apple, 0.6, 1)
         for (i = 0; i < clue1.length; i++) {
             clue1[i].style.backgroundColor = '#c6ab93'
             clue1[i].style.borderColor = '#321a03'
@@ -159,7 +180,7 @@ apple.addEventListener('click', function () {//苹果注册事件
         yadang.style.backgroundImage = 'url(../redimage/yadang2.png)'
         apple.style.backgroundImage = 'url(../redimage/apple1.png)'
         apple.style.transform = 'rotate(65deg)'
-        animatetop(apple, 900, 3)
+        animatetop(apple, 0.9, 3)
         for (i = 0; i < clue1.length; i++) {
             clue1[i].style.backgroundColor = '#ffe1e1'
             clue1[i].style.borderColor = 'rgb(165, 10, 10)'
@@ -300,6 +321,7 @@ document.addEventListener('click', function () {
     }
 })
 
+
 var grey = document.querySelectorAll('.grey')
 for (i = 0; i < boards.length; i++) {//拖动盒子到指定简介盒子处并显示简介
     scales(boards[i]);
@@ -311,7 +333,8 @@ for (i = 0; i < boards.length; i++) {//拖动盒子到指定简介盒子处并�
             var yo = this.offsetTop
             var x = event.pageX - this.offsetLeft;
             var y = event.pageY - this.offsetTop;
-            if (isCollect1[0] && isCollect1[1] && isCollect1[2] && isCollect1[3] && isclueOpened) {
+
+            if (clear(isCollect1) && isclueOpened) {
                 var a = 0
                 for (i = 0; i < tls.length; i++) {
                     if (tls[i] == thistl) {
@@ -320,14 +343,19 @@ for (i = 0; i < boards.length; i++) {//拖动盒子到指定简介盒子处并�
                     }
                 }
 
+
                 //console.log(a)
                 document.addEventListener('mousemove', move)
                 function move(e) {
                     thistl.style.left = e.pageX - x + 'px';
                     thistl.style.top = e.pageY - y + 'px';
                 }
-                document.addEventListener('mouseup', function () {
+                document.addEventListener('mouseup', ups)
+                function ups() {
                     //console.log(getpagex(thistl), getpagex(boards[a]))
+                    if (clear(isboard)) {
+                        document.removeEventListener('mouseup', ups)
+                    }
                     if (a < 2) {
                         if (distancex(thistl, boards[a], 100, 200)
                             && distancey(thistl, boards[a], 50, 100)) {
@@ -389,7 +417,7 @@ for (i = 0; i < boards.length; i++) {//拖动盒子到指定简介盒子处并�
                         }
                     }
 
-                })
+                }
             }
 
         })
@@ -569,4 +597,33 @@ document.addEventListener('click', function () {//点开后灰色蒙层
         }
     }
 })
-
+var bg = document.querySelectorAll('.bg')
+var tele = document.querySelector('.tele')
+window.addEventListener('resize', rsize)
+window.addEventListener('load', rsize)
+function rsize() {
+    // var width=this.innerWidth
+    for (i = 0; i < tes.length; i++) {
+        tes[i].style.width = tes[i].offsetHeight + 'px'
+    }
+    for (i = 0; i < tos.length; i++) {
+        tos[i].style.width = tos[i].offsetHeight + 'px'
+    }
+    left.style.borderWidth = window.innerWidth * 0.04 + 'px'
+    right.style.borderWidth = window.innerWidth * 0.04 + 'px'
+    yadang.style.height = yadang.offsetWidth * 3 + 'px'
+    if (bg[0].offsetHeight != bg[0].offsetWidth) {
+        bg[0].style.height = bg[0].offsetWidth + 'px'
+        bg[1].style.height = bg[1].offsetWidth + 'px'
+        scrclue1.style.height = scrclue1.offsetWidth + 'px'
+        tele.style.height = 1.13 * scrclue1.offsetWidth + 'px'
+        scrclue1.parentElement.style.height = scrclue1.parentElement.offsetWidth + 'px'
+        scrclue2.style.height = scrclue2.offsetWidth + 'px'
+        scrclue2.parentElement.style.height = scrclue2.parentElement.offsetWidth + 'px'
+    }
+    if (isred) {
+        apple.style.top = 90 + '%'
+    } else {
+        apple.style.top = 60 + '%'
+    }
+}
