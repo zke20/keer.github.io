@@ -110,12 +110,27 @@ em {
     z-index: 3;
 }
 
+.pangbai {
+    position: fixed;
+    top: 2%;
+    left: 50%;
+    height: 10%;
+    width: 60%;
+    margin-left: -30%;
+    transition-duration: 2s;
+    color: #ffffff;
+    font-size: 18px;
+    text-align: center;
+    opacity: 0;
+}
+
+
 .apple {
     position: absolute;
     top: 90%;
     left: 58%;
-    height: 5%;
-    width: 9%;
+    height: 9%;
+    width: 15%;
     background-image: url(../redimage/apple1.png);
     z-index: 1;
     background-size: contain;
@@ -178,7 +193,6 @@ em {
 
 .dav {
 
-
     line-height: 50%;
 }
 
@@ -224,7 +238,7 @@ em {
     position: fixed;
     height: 60%;
     width: 31.5%;
-    top: 7%;
+    top: 9%;
     border-radius: 5%;
     overflow: hidden;
     left: 50%;
@@ -307,7 +321,6 @@ ul {
     line-height: 100px;
     color: rgba(255, 0, 0, 0);
     transition-duration: 0.5s;
-    overflow: hidden;
 }
 
 /* .tools span:nth-of-type(1),
@@ -316,6 +329,11 @@ ul {
 .tools span:nth-of-type(7) {
     border: 1px solid rgb(202, 202, 202)
 } */
+.tools {
+    z-index: 4;
+    position: relative;
+}
+
 .tools span:nth-of-type(7) {
     margin-left: -40%;
 }
@@ -335,20 +353,20 @@ ul {
 }
 
 .tools span:nth-of-type(5) {
-    margin-left: 5%;
+    margin-left: 10%;
     background-color: black;
 }
 
 .tools span:nth-of-type(4) {
-    margin-left: 13%;
+    margin-left: 18%;
 }
 
 .tools span:nth-of-type(1) {
-    margin-left: 21%;
+    margin-left: 26%;
 }
 
 .tools span:nth-of-type(8) {
-    margin-left: 29%;
+    margin-left: 34%;
     background-color: black;
 
 }
@@ -363,11 +381,11 @@ ul {
 }
 
 .tool div {
-    height: 60px;
-    width: 70px;
+    height: 80%;
+    width: 80%;
     position: absolute;
-    top: 20px;
-    left: 15px;
+    top: 5%;
+    left: 5%;
     background-color: #e26d63;
     border-radius: 15%;
     border: 5px solid #93190f;
@@ -378,6 +396,7 @@ ul {
     overflow: hidden;
     padding-top: 5px;
     font-weight: 700;
+
 }
 
 .blk {
@@ -527,43 +546,43 @@ x=253%z/40%=   2.53z/0.4 */
 }
 
 .board1 {
-    left: 140px;
-    top: 430px;
-    height: 40px;
-    width: 150px;
+    left: 18%;
+    top: 68%;
+    height: 7%;
+    width: 25%;
 }
 
 .board2 {
-    height: 40px;
-    width: 120px;
-    left: 610px;
-    top: 650px;
+    height: 6%;
+    width: 15%;
+    left: 88%;
+    top: 93%;
 }
 
 .board3 {
-    height: 40px;
-    width: 100px;
-    left: 1020px;
-    top: 650px;
+    height: 7%;
+    width: 15%;
+    left: 140%;
+    top: 91%;
 }
 
 .board4 {
-    height: 40px;
-    width: 100px;
-    left: 320px;
-    top: 650px;
+    height: 7%;
+    width: 15%;
+    left: 37.5%;
+    top: 91%;
 }
 
 .board5 {
-    height: 100px;
-    width: 80px;
-    left: 1000px;
-    top: 550px;
+    height: 15%;
+    width: 10%;
+    left: 130%;
+    top: 80%;
 }
 
 .grey {
-    width: 1500px;
-    height: 1500px;
+    width: 300%;
+    height: 300%;
     background-color: #00000000;
     position: absolute;
     display: none;
@@ -572,7 +591,7 @@ x=253%z/40%=   2.53z/0.4 */
 .board div {
     padding-top: 0;
     padding-left: 2px;
-    font-size: 15px;
+    font-size: 12px;
     visibility: hidden;
 
 }
@@ -586,25 +605,25 @@ x=253%z/40%=   2.53z/0.4 */
 }
 
 .lt1 {
-    left: 100px;
-    top: 100px;
+    left: 20%;
+    top: 20%;
     transform: rotate(15deg);
 }
 
 .lt2 {
-    left: 610px;
-    top: 250px;
+    left: 85%;
+    top: 80%;
     transform: rotate(-35deg);
 }
 
 .lt3 {
-    left: 450px;
-    top: 650px;
+    left: 53%;
+    top: 90%;
     transform: rotate(-25deg);
 }
 
 .lt4 {
-    left: 800px;
-    top: 360px;
+    left: 105%;
+    top: 40%;
     transform: rotate(45deg);
 }
