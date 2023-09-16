@@ -20,6 +20,30 @@ function animatetop(obj, target, steptime, callback) {//苹果动画
         obj.style.top = obj.offsetTop + step + 'px';
     }, 30);
 }
+function toolleft(obj, target, targettop, steptime, callback) {//工具箱动画
+    clearInterval(obj.timer);
+    // console.log(target, target * obj.parentElement.offsetHeight, obj.offsetTop)
+    target = (0.5 + target) * obj.parentElement.offsetWidth
+    targettop = targettop * window.innerHeight
+    obj.timer = setInterval(function () {
+        var stepx = (target - obj.offsetLeft) / steptime;
+        stepx = stepx > 0 ? Math.ceil(stepx) : Math.floor(stepx);
+        var stepy = (targettop - obj.offsetTop) / steptime;
+        stepy = stepy > 0 ? Math.ceil(stepy) : Math.floor(stepy);
+        if (obj.offsetLeft >= target) {
+            clearInterval(obj.timer);
+
+            if (callback) {
+                callback();
+            } else {
+
+            }
+        }
+        obj.style.marginLeft = 0 + 'px';
+        obj.style.left = obj.offsetLeft + stepx + 'px';
+        obj.style.top = obj.offsetTop + stepy + 'px';
+    }, 1000);
+}
 function larger() {//鼠标经过放大
     if (!isclueOpened && !isOpened2) {
         this.style.transform = 'scale(1.2)'
@@ -165,9 +189,9 @@ function rsize() {//调整视口自适应尺寸
     }
 }
 function getRandomInt(min, max) {//随机整数
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + 1) + min;
+    min = Math.floor(min);
+    max = Math.ceil(max);
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 function gettx(obj, tx) {//旁白文字
     var isvisible = false
@@ -175,18 +199,26 @@ function gettx(obj, tx) {//旁白文字
         obj[i].addEventListener('click', function () {
             pangbai.innerHTML = tx[getRandomInt(0, tx.length - 1)]
             if (!isvisible) {
-                pangbai.style.transitionDelay = '1s'
-                pangbai.style.opacity = '0'
+                pangbai.style.transitionDelay = '0s'
+                pangbai2.style.transitionDelay = '2s'
+                pangbai.style.opacity = '1'
+                pangbai2.style.opacity = '1'
                 isvisible = true
                 // console.log(1)
             } else {
-                pangbai.style.transitionDelay = '0s'
-                pangbai.style.opacity = '1'
+                pangbai.style.transitionDelay = '2s'
+                pangbai2.style.transitionDelay = '0s'
+                pangbai.style.opacity = '0'
+                pangbai2.style.opacity = '0'
                 isvisible = false
                 // console.log(2)
             }
         })
     }
+}
+function end(o) {//结束
+    o.style.transitionDelay = '1s';
+    o.style.transitionDuration = '3s';
 }
 //#endregion
 //#region ------------------------------------提取变量------------------------------------------------
@@ -218,28 +250,35 @@ var isliter = [false, false, false, false]
 var bg = document.querySelectorAll('.bg')
 var tele = document.querySelector('.tele')
 var pangbai = document.querySelector('.pangbai')
+var pangbai2 = document.querySelector('.pangbai2')
+var setting = document.querySelector('.setting')
+var bgm = document.querySelector('.bgm')
+var silent = false
+var yinxiao = document.querySelector('.yinxiao')
+var isend = false
 //#endregion
 //#region --------------------------------------------旁白---------------------------------------
-var tx1 = ['I am shamed',//马赛克
-    'It is not here',
-    'I have lost my name',
-    'I am not deserved a work']
+var tx1 = ['It is not safe for children.<br>别让小孩看见。',//马赛克
+    'Too exposed.<br>过于暴露。',
+    'These are all necessary deletions.<br>必要的删减。',
+    'This does not impair its artistry.<br>这不影响它的艺术性。',
+    'Can this also called ART?<br>这也叫艺术？',
+    'Can \' t read.<br>看不懂。',
+    'Pixelate when it\'s time to.<br>该打码时就要打码。',
+    'Am I still me.<br>我是否还是我。',//线索
+    'I no longer have a name, just as Adam lost his apple.<br>我已不再拥有姓名，正如亚当没有了他的苹果。',
+    'Does your body embarrass you like this?<br>你的身体竟这样令你难堪吗？',
+    'Am I the ugly, twisted, and unbearable one... or you?<br>丑陋、扭曲、不堪的是我……还是你？',
+    'May art no longer be pixelate.<br>愿艺术不再打码。',//名牌
+    'David cannot be posted without pixelated.<br>不打码发不出来的大卫。',
+    'I don\'t want to pixelate it either, but I have no choice.<br>我也不想打码，但那样发不出来。',
+    'I desire for the whole me.<br>想要完整的我。']
 
-var tx2 = ['I am shamed',//线索
-    'It is not here',
-    'I have lost my name',
-    'I am not deserved a work']
-
-var tx3 = ['I am shamed',//名牌
-    'It is not here',
-    'I have lost my name',
-    'I am not deserved a work']
-
-var tx4 = ['I am shamed',//文字
-    'It is not here',
-    'I have lost my name',
-    'I am not deserved a work']
-
+var tx2 = ['The human body itself is the measuring stick for the beauty of all things.<br>人体自身是测量万物美的标尺。',//文字
+    'From primitiveness, to confinement, to revival, to...<br>从原始，到禁锢，到复兴，到……',
+    'When will Apple, trapped in a cyclical dream, wake up?<br>陷入循环之梦的苹果，何时能苏醒？',
+    'I was born naked and it was you who was dirty.<br>我生来赤裸，肮脏的是你。']
+var tx3 = ['In human civilization, I am constantly being castrated and awakened.<br>我在人类文明中，不断被阉割，被唤醒。',]
 //#endregion
 //#region --------------------------------------------鼠标经过交互----------------------------------------------
 scalearray(left, 90);
@@ -250,9 +289,9 @@ scalesli(clue1);
 scalesli(tls);
 //-----------------------------------------鼠标点击显示文字-------------------------------------
 gettx(blks, tx1)
-gettx(clue1, tx2)
-gettx(boards, tx3)
-gettx(litters, tx4)
+gettx(clue1, tx1)
+gettx(boards, tx1)
+gettx(litters, tx2)
 //--------------------------------------交互事件--------------------------------------------
 left.addEventListener('click', function () {//按钮箭头注册事件
     var x = parseInt(bg1['offsetLeft'] / window.innerWidth);
@@ -316,6 +355,31 @@ apple.addEventListener('click', function () {//苹果注册事件
 
     }
 })
+
+setting.addEventListener('click', function () {//开关背景音乐
+    if (!silent) {
+        this.style.backgroundImage = 'url(../redimage/silent.png)'
+        bgm.pause()
+        silent = true
+    } else {
+        this.style.backgroundImage = 'url(../redimage/aloud.png)'
+        bgm.play()
+        silent = false
+    }
+
+})
+opac(setting)
+opac(left)
+opac(right)
+function opac(o) {
+    o.addEventListener('mouseenter', function () {
+        this.style.opacity = 1
+    })
+    o.addEventListener('mouseleave', function () {
+        this.style.opacity = 0.3
+    })
+}
+
 //#endregion
 //#region ------------------------------------------游戏-------------------------------------------------------
 for (i = 0; i < clue1.length; i++) {
@@ -684,6 +748,50 @@ document.addEventListener('click', function () {//点开后灰色蒙层
             grey[i].style.display = 'none'
             grey[i].style.backgroundColor = '#00000000'
         }
+    }
+})
+
+
+
+apple.addEventListener('click', function () {//结束隐藏盒子
+    if (clear(isliter)) {
+        for (i = 0; i < bg.length; i++) {
+            end(bg[i])
+            bg[i].style.opacity = '0';
+        }
+        end(scrclue1);
+        scrclue1.parentElement.style.opacity = '0';
+        end(scrclue2);
+        scrclue2.parentElement.style.opacity = '0';
+        end(yadang)
+        end(left)
+        end(right)
+        left.style.display = 'none'
+        right.style.display = 'none'
+        yadang.style.backgroundImage = 'none'
+        for (i = 0; i < tos.length; i++) {
+            end(tos[i])
+            end(tes[i])
+            tos[i].style.backgroundColor = 'black';
+            tes[i].style.backgroundColor = 'black'
+        }
+        isend = true
+    }
+})
+apple.addEventListener('click', function () {//结束工具箱动画
+    if (isend) {
+        gettx(apple, tx3)
+        apple.style.transitionDelay = '5s';
+        apple.style.transitionDuration = '3s';
+        apple.style.opacity = '0';
+        toolleft(tos[0], 0.2, 0.5, 1);//T
+        toolleft(tes[0], -0.2, 0.5, 1);//A
+        toolleft(tes[1], -0.12, 0.5, 1);//S
+        toolleft(tos[1], 0.12, 0.5, 1);//A
+        toolleft(tes[2], 0.04, 0.5, 1);//R
+        toolleft(tos[2], -0.04, 0.5, 1);//T
+        toolleft(tos[3], -0.28, 0.5, 1);//C
+        toolleft(tes[3], 0.28, 0.5, 1);//E
     }
 })
 //#endregion

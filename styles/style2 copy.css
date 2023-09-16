@@ -81,6 +81,8 @@ em {
     border: 50px solid;
     transform-origin: center;
     border-color: #00000000;
+    transition-duration: 0.5s;
+    opacity: 0.3;
 }
 
 .leftarray {
@@ -112,7 +114,7 @@ em {
 
 .pangbai {
     position: fixed;
-    top: 2%;
+    top: 0%;
     left: 50%;
     height: 10%;
     width: 60%;
@@ -122,8 +124,21 @@ em {
     font-size: 18px;
     text-align: center;
     opacity: 0;
+    line-height: 120%;
 }
 
+.pangbai2 {
+    position: fixed;
+    top: 0%;
+    left: 50%;
+    height: 8%;
+    width: 60%;
+    margin-left: -30%;
+    transition-duration: 2s;
+    transition-delay: 2s;
+    opacity: 0;
+    background-color: #000000;
+}
 
 .apple {
     position: absolute;
@@ -136,7 +151,7 @@ em {
     background-size: contain;
     background-repeat: no-repeat;
     transition-timing-function: ease-in;
-    z-index: 3;
+    transition-duration: 0.1s;
 }
 
 .clue1 {
@@ -146,7 +161,7 @@ em {
     border: 3px solid rgb(165, 10, 10);
     box-shadow: 2px 2px 8px #00000060;
     transform-origin: bottom;
-    font-size: 14px;
+    font-size: 12px;
     overflow: hidden;
     transition-duration: 0.2s;
 }
@@ -332,6 +347,7 @@ ul {
 .tools {
     z-index: 4;
     position: relative;
+    height: 100%;
 }
 
 .tools span:nth-of-type(7) {
@@ -626,4 +642,17 @@ x=253%z/40%=   2.53z/0.4 */
     left: 105%;
     top: 40%;
     transform: rotate(45deg);
+}
+
+.setting {
+    height: 5%;
+    width: 5%;
+    position: fixed;
+    right: 0.2%;
+    bottom: 3%;
+    background-image: url(../redimage/aloud.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    transition-duration: 1s;
 }
