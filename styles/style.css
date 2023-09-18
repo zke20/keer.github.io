@@ -1,6 +1,11 @@
-/* 结构 */
+/*#region 结构 */
 html {
   background-color: rgb(0, 0, 0);
+  /* min-width: 1280px;
+  max-width: 2400px;
+  min-height: 637px;
+  max-height: 1194px; */
+  overflow-x: hidden;
 
 }
 
@@ -27,8 +32,53 @@ li {
   list-style-type: none;
 }
 
-/*---------box通用样式---------*/
+/* #endregion */
+/* #region 外部通用 */
+/* #region 小人动画 */
+#me span {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  background-image: url("../images/me1.gif");
+  background-size: 95%;
+  background-repeat: no-repeat;
+  top: 50%;
+  left: 50%;
+  margin-top: -60px;
+  margin-left: -50px;
+}
+
+/* #endregion */
+/*#region START提示语*/
+#start span {
+  background-color: rgb(50, 50, 50);
+  float: left;
+  height: 320px;
+  width: 320px;
+  border-radius: 5%;
+  margin-left: 50px;
+  background-image: url(../images/texture.png);
+}
+
+#start {
+  width: 1500px;
+  height: 320px;
+  left: 50%;
+  margin-left: -750px;
+  padding-left: 205px;
+  position: relative;
+  font-size: 30px;
+  color: #000000;
+  text-align: center;
+  margin-top: 450px;
+  line-height: 320px;
+  letter-spacing: 15px;
+}
+
+/*#endregion*/
+/*#region box通用样式*/
 .box {
+  /*所有的方块box*/
   width: 60px;
   height: 60px;
   border-radius: 10%;
@@ -37,11 +87,13 @@ li {
 }
 
 .red {
+  /*红色方块，正向动画*/
   background-color: rgb(255, 92, 92);
   color: #000000;
 }
 
 .black {
+  /*黑色方块，反向动画*/
   font-size: 30px;
   line-height: 54px;
   letter-spacing: 6px;
@@ -52,6 +104,7 @@ li {
 
 .keer,
 .me {
+  /*叫keer和me的方块box*/
   font-size: 25px;
   letter-spacing: 8px;
   padding-top: 5px;
@@ -59,14 +112,17 @@ li {
 }
 
 .me {
+  /*me的方块box*/
   line-height: 50px;
 }
 
 .keer {
+  /*keer的方块box*/
   line-height: 25px;
 }
 
 .gamedesigner {
+  /*gamedesigner的方块box*/
   line-height: 19px;
   letter-spacing: 1px;
   padding-left: 2px;
@@ -77,14 +133,15 @@ li {
   background-color: rgb(255, 32, 32);
 }
 
-/* ------头部盒子位置---------*/
+/* #endregion */
+/*#region 头部盒子位置*/
 .head {
   position: sticky;
   top: 0;
-  height: 70px;
+  height: 50%;
   background-color: #000000;
   z-index: 5;
-  padding-top: 70px
+  padding-top: 1%
 }
 
 .head ul li {
@@ -103,8 +160,8 @@ li {
   left: 350px;
 }
 
-
-/*-----------右侧栏盒子位置-----------*/
+/* #endregion */
+/*#region 右侧栏盒子位置*/
 .right {
   position: fixed;
   bottom: 0;
@@ -145,7 +202,8 @@ li {
   top: 140px;
 }
 
-/* ----------动画----------------*/
+/* #endregion */
+/*#region 方块的动画*/
 @keyframes rota {
   0% {
     transform: rotate(-2deg);
@@ -174,17 +232,21 @@ li {
   animation-delay: 0.25s;
 }
 
-/* 游戏部分背景框顶部*/
+/* #endregion */
+/* #endregion */
+/* #region 游戏部分 */
+/* #region 背景框 */
+/*#region 游戏部分背景框顶部*/
 .gameall {
   visibility: hidden;
+  width: 100%;
+
 }
 
 .gameboxtop {
-  margin-top: -10px;
-  position: fixed;
-  top: 150px;
-  left: 60px;
-  width: 1505px;
+  position: sticky;
+  margin-left: 2%;
+  width: 80%;
   height: 60px;
   z-index: 3;
   background-color: #3f3f3f00;
@@ -192,21 +254,23 @@ li {
   border-top: 5px solid rgb(117, 117, 117);
 }
 
-/* 游戏部分背景框*/
+/* #endregion */
+/*#region 游戏部分背景框中部*/
 .gamebox {
+  left: 2%;
   height: 66000px;
   margin-top: 25px;
   position: relative;
-  left: 60px;
   background-image: url(../images/gamebox.png);
   background-attachment: fixed;
   background-size: 50%;
   background-color: rgba(255, 255, 255, 0.575);
-  width: 1500px;
+  width: 80%;
   z-index: 1;
   box-shadow: 0px 0px 0px 10px rgba(190, 91, 10, 0) inset;
   border: 5px solid rgb(117, 117, 117);
 }
+
 
 .gameboxcontent>div {
   position: absolute;
@@ -214,7 +278,7 @@ li {
 }
 
 .introduction {
-  top: 1800px;
+  top: 2.7%;
   height: 1300px;
 }
 
@@ -238,18 +302,18 @@ li {
   font-size: 30px;
 }
 
-/* 游戏部分背景框底部*/
+/* #endregion */
+/*#region 游戏部分背景框底部*/
 .gameboxbottom {
-  position: fixed;
+  position: sticky;
   bottom: 0;
-  left: 0;
-  width: 1690px;
-  height: 60px;
+  width: 90%;
   z-index: 4
 }
 
 .gameboxbottom>div {
   position: absolute;
+
 }
 
 .triangle-left,
@@ -260,8 +324,6 @@ li {
 }
 
 .triangle-left {
-  left: 16px;
-  top: 15px;
   border-top-color: rgb(117, 117, 117);
   transform: rotate(-45deg);
   transform-origin: center;
@@ -269,72 +331,88 @@ li {
 }
 
 .rectangle {
-  width: 1560px;
-  height: 100%;
-  left: 60px;
+  width: 90.6%;
+  height: 140%;
+  left: 1.6%;
+  top: -35%;
   background-color: rgb(117, 117, 117);
   box-shadow: 0px -5px 0px rgba(0, 0, 0, 0.5);
 }
 
 .triangle-right {
-  left: 1570px;
-  top: 15px;
+  left: 90.5%;
   border-top-color: rgb(117, 117, 117);
   transform: rotate(45deg);
   transform-origin: center;
-
 }
 
 .rectangle>div {
-  height: 100px;
-  width: 120px;
+  height: 250%;
+  width: 9%;
   position: absolute;
-  bottom: -35px;
+  bottom: -90%;
   background-position: 0px -5px;
   background-size: 90% 110%;
-  line-height: 20px;
-  padding-left: 30px;
-  padding-top: 50px;
+  line-height: 120%;
+  padding-left: 3%;
+  padding-top: 3%;
   background-repeat: no-repeat;
   font-family: 'Noto Sans SC', Courier, monospace;
   font-weight: 700;
   font-size: 18px;
 
+
 }
 
 #redbutton {
-  left: 200px;
+  left: 15%;
   background-image: url(../images/kadai1.png);
 }
 
 #yellowbutton {
-  left: 500px;
+  left: 35%;
   background-image: url(../images/kadai2.png);
 }
 
 #greenbutton {
-  left: 800px;
+  left: 55%;
   background-image: url(../images/kadai3.png);
 }
 
 #purplebutton {
-  left: 1100px;
+  left: 75%;
   background-image: url(../images/kadai4.png);
 }
 
-/*-------------------简介内-----------------*/
-.inner {
-  position: absolute;
-  background-color: #000000;
-  top: 3800px;
-  left: 110px;
-  color: #ffffff;
-
+/* #endregion */
+/* #region 水管 */
+.tube {
+  width: 90px;
+  height: 100px;
+  background-image: url("../images/tube.png");
+  background-size: 95%;
+  background-repeat: no-repeat;
 }
 
+#tube1 {
+  position: absolute;
+  top: 120%;
+  left: 107px;
+}
+
+#tube2 {
+  position: fixed;
+  bottom: 5%;
+  left: 115px;
+  visibility: hidden;
+}
+
+/* #endregion */
+/* #endregion */
+/* #region 跷跷板 */
 .qqb {
   position: absolute;
-  top: 350px;
+  top: 19.4%;
   left: 50px;
   height: 10px;
   width: 200px;
@@ -343,7 +421,7 @@ li {
 
 .qqbb {
   position: absolute;
-  top: 330px;
+  top: 18.3%;
   left: 120px;
   border: 30px solid transparent;
   border-top-color: rgb(0, 0, 0);
@@ -353,34 +431,91 @@ li {
 
 .tx1 {
   position: absolute;
-  top: 290px;
+  top: 16.1%;
   left: 210px;
   letter-spacing: 2px;
 }
 
 .tx2 {
   position: absolute;
-  top: 200px;
+  top: 11.1%;
   left: 280px;
 }
 
 .tx3 {
   position: absolute;
-  top: 200px;
+  top: 11.1%;
   left: 350px;
   font-size: 25px;
   line-height: 30px;
   letter-spacing: 8px;
 }
 
+/* #endregion */
+/* #region 风扇 */
+.fan {
+  position: absolute;
+  top: 1300px;
+  left: 100px;
+  height: 10px;
+  width: 50px;
+  background-color: #000000;
+}
+
+.fanbox li {
+  position: absolute;
+  top: 1300px;
+}
+
+.inner {
+  position: absolute;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.tx4 {
+  left: 450px;
+  font-size: 25px;
+  letter-spacing: 2px;
+  line-height: 60px;
+}
+
+.tx5 {
+  left: 520px;
+  letter-spacing: 2px;
+  font-size: 25px;
+  line-height: 30px;
+}
+
+.tx6 {
+  left: 1000px;
+  letter-spacing: 5px;
+  font-size: 25px;
+  line-height: 30px;
+}
+
+/* #endregion */
+/*#region 个人简介*/
+.pict {
+  height: 10%;
+  width: 10%;
+  position: absolute;
+  left: 80%;
+  top: 150px;
+  border-color: rgb(156, 54, 31);
+  border-style: solid;
+  border-width: 15PX;
+  box-shadow: 10px 10px #2e00139d;
+}
+
 .outtree {
-  margin-left: 50px;
+  margin-left: 12%;
   margin-top: 150px;
 }
 
 .tree {
-  height: 500px;
-  width: 480px;
+  height: 30%;
+  width: 30%;
   float: left;
   background-size: 90% 100%;
   background-repeat: no-repeat;
@@ -423,114 +558,79 @@ li {
 }
 
 #tr11 {
-  left: 135px;
+  left: 25.8%;
 }
 
 #tr12 {
-  left: 0px;
+  left: 0%;
 }
 
 #tr13 {
-  left: 300px;
+  left: 57.3%;
 }
 
 #tr21 {
-  left: 35px;
+  left: 6.7%;
 }
 
 #tr22 {
-  left: 65px;
+  left: 12.4%;
 }
 
 #tr23 {
-  left: 310px;
+  left: 59.2%;
 }
 
 #tr24 {
-  left: 255px;
+  left: 48.7%;
 }
 
 #tr31 {
-  left: 30px;
+  left: 5.7%;
 }
 
 #tr32 {
-  left: 320px;
+  left: 61.2%;
 }
 
 #tr33 {
-  left: 150px;
+  left: 28.7%;
 }
 
 .skill {
-  position: absolute;
-  top: 1100px;
-  width: 1800px;
-  left: -120px;
+  width: 100%;
+  left: 12%;
 }
 
 .skill li {
   float: left;
-  width: 300px;
-  margin-left: 200px;
+  width: 15%;
+  margin-left: 13%;
   font-size: 40px;
   text-align: center;
   color: #000000;
   letter-spacing: 5px;
 }
 
-.fan {
-  position: absolute;
-  top: 1300px;
-  left: 100px;
-  height: 10px;
-  width: 50px;
-  background-color: #000000;
-}
-
-.fanbox li {
-  position: absolute;
-  top: 1300px;
-}
-
-.tx4 {
-  left: 450px;
-  font-size: 25px;
-  letter-spacing: 2px;
-  line-height: 60px;
-}
-
-.tx5 {
-  left: 520px;
-  letter-spacing: 2px;
-  font-size: 25px;
-  line-height: 30px;
-}
-
-.tx6 {
-  left: 1000px;
-  letter-spacing: 5px;
-  font-size: 25px;
-  line-height: 30px;
-}
-
+/* #endregion */
+/* #region 作品目录 */
 .content {
   position: absolute;
   top: 1400px;
   left: 50%;
-  width: 1000px;
-  margin-left: -500px;
+  width: 80%;
+  margin-left: -36%;
 }
 
 .content li,
 .content div {
-  height: 400px;
-  width: 400px;
+  height: 40%;
+  width: 40%;
 }
 
 .content li {
   float: left;
-  margin: 30px 50px;
+  margin: 4% 5%;
   position: relative;
   overflow: hidden;
   box-shadow: 10px 10px 10px #00000080 inset;
@@ -538,9 +638,25 @@ li {
   background-size: 50%;
 }
 
+.fanimg {
+  position: absolute;
+  height: 150px;
+  width: 1500px;
+  background-image: url(../images/fan.png);
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  top: 1230px;
+  left: 60px
+}
+
+/* #region 目录背景颜色 */
 .content li:nth-of-type(1) {
   background-color: #ff7e7e;
   color: #91261f;
+  background-image: url(../images/right.png);
+  background-size: contain;
+  background-position-y: 20px;
+  background-repeat: no-repeat;
 
 }
 
@@ -568,6 +684,8 @@ li {
   background-position-x: -250px;
 }
 
+/* # endregion */
+/* #endregion */
 .window {
   font-size: 40px;
   text-align: center;
@@ -578,13 +696,6 @@ li {
 
 }
 
-.window>div {
-  position: absolute;
-  top: -500px;
-  background-image: url(../images/me2.gif);
-  background-size: 22%;
-  background-repeat: no-repeat;
-}
 
 .window span {
   position: absolute;
@@ -599,17 +710,23 @@ li {
 .window #span3 {
   top: 10px;
   left: 30px;
+  line-height: 60px;
+  font-size: 22px;
+  letter-spacing: 2px;
 }
 
 .window #span1 {
   top: 200px;
   left: 100px;
+  font-size: 22px;
 
 }
 
 .window #span2 {
   top: 200px;
   left: 170px;
+  line-height: 60px;
+  font-size: 20px;
 }
 
 /*work2*/
@@ -674,9 +791,15 @@ li {
   letter-spacing: 2px
 }
 
-
-
-
+.window>div {
+  position: absolute;
+  top: -500px;
+  background-image: url(../images/me2.gif);
+  background-size: 80px 80px;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+}
 
 .door div {
   position: absolute;
@@ -686,7 +809,7 @@ li {
 }
 
 #door1 {
-  background-position: 10px 80px;
+  background-position: 10px 100px;
 }
 
 #door2 {
@@ -704,6 +827,9 @@ li {
 #door1 div {
   left: 30px;
   top: 200px;
+  font-size: 22px;
+  letter-spacing: 2px;
+  line-height: 60px;
 
 }
 
@@ -729,70 +855,13 @@ li {
   letter-spacing: 2px
 }
 
-.tube {
-  width: 90px;
-  height: 100px;
-  background-image: url("../images/tube.png");
-  background-size: 95%;
-  background-repeat: no-repeat;
-}
-
-#tube1 {
-  position: absolute;
-  top: 140px;
-  left: 107px;
-}
-
-#tube2 {
-  position: fixed;
-  bottom: 50px;
-  left: 115px;
-  visibility: hidden;
-}
-
-#me span {
-  position: absolute;
-  height: 100px;
-  width: 100px;
-  background-image: url("../images/me1.gif");
-  background-size: 95%;
-  background-repeat: no-repeat;
-  top: 50%;
-  left: 50%;
-  margin-top: -60px;
-  margin-left: -50px;
-}
-
-.fanimg {
-  position: absolute;
-  height: 150px;
-  width: 1500px;
-  background-image: url("../images/fan.png");
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  top: 1230px;
-  left: 60px
-}
-
-.pict {
-  height: 210px;
-  width: 210px;
-  position: absolute;
-  left: 1200px;
-  top: 150px;
-  border-color: rgb(156, 54, 31);
-  border-style: solid;
-  border-width: 15PX;
-  box-shadow: 10px 10px #2e00139d;
-}
-
-/*-------------------作品1-------------------*/
+/* #endregion */
+/*#region 作品主页背景*/
 .innerbox>span {
   position: fixed;
-  top: 140px;
-  left: 60px;
-  height: 500px;
-  width: 1500px;
+  top: 7%;
+  left: 2%;
+  width: 80%;
   border: 5px solid rgb(117, 117, 117);
   background-image: url(../images/texture.png);
   background-size: 30%;
@@ -814,57 +883,11 @@ li {
   background-color: #a5618e;
 }
 
-
-/*----------------装饰-----START------------*/
-#start span {
-  background-color: rgb(50, 50, 50);
-  float: left;
-  height: 320px;
-  width: 320px;
-  border-radius: 5%;
-  margin-left: 50px;
-  background-image: url(../images/texture.png);
-}
-
-#start {
-  width: 1500px;
-  height: 320px;
-  left: 50%;
-  margin-left: -750px;
-  padding-left: 205px;
-  position: relative;
-  font-size: 30px;
-  color: #000000;
-  text-align: center;
-  margin-top: 450px;
-  line-height: 320px;
-  letter-spacing: 15px;
-}
-
-/*start提示语*/
-
-.build {
-  position: absolute;
-  left: 2700px;
-  height: 600px;
-  width: 500px;
-  background-color: #ffffff;
-}
-
-.end {
-  position: absolute;
-  left: 5700px;
-  height: 600px;
-  width: 500px;
-  background-color: #ffffff;
-}
-
+/* #endregion */
+/* #region 跳转到游戏主页链接按钮 */
 .button1,
 .buttonred {
   position: absolute;
-  left: 270px;
-  top: 40px;
-  margin-left: 320px;
   padding-left: 10px;
   width: 80px;
   height: 80px;
@@ -881,18 +904,64 @@ li {
 .button1 {
   background-color: rgb(0, 75, 6);
   color: #79c772;
+  left: 45%;
+  top: 5%;
 }
 
 .buttonred {
   background-color: rgb(126, 6, 6);
   color: #ff7e7e;
+  right: 2%;
+  top: 2%;
 }
 
+/* #endregion */
+/* #region 作品1内容 */
+#innerbox1 video,
+#innerbox1 span:nth-of-type(3) {
+  height: 340.2px;
+  width: 604.8px;
+}
+
+#innerbox1 span:nth-of-type(1) {
+  font-size: 33px;
+  position: absolute;
+  top: 2%;
+  left: 3%;
+  height: 100px;
+  width: 500px;
+  border-style: none;
+}
+
+#innerbox1 span:nth-of-type(2) {
+  font-size: 25px;
+  font-weight: 700;
+  position: absolute;
+  top: 20%;
+  left: 2%;
+  height: 90%;
+  width: 50%;
+  border-style: none;
+  text-align: left;
+  overflow: auto
+}
+
+#innerbox1 span:nth-of-type(3) {
+  position: absolute;
+  top: 50px;
+  right: 70px;
+  border-style: none;
+  background-image: url(../images/loading.png);
+  background-size: 100%;
+}
+
+/* #endregion */
+/* #region 作品3内容 */
 #innerbox3 span:nth-of-type(1) {
   font-size: 33px;
   position: absolute;
-  top: 40px;
-  left: 35px;
+  top: 2%;
+  left: 3%;
   height: 100px;
   width: 500px;
   border-style: none;
@@ -902,25 +971,28 @@ li {
   font-size: 25px;
   font-weight: 700;
   position: absolute;
-  top: 40px;
-  left: 800px;
-  height: 600px;
-  width: 600px;
+  top: 20%;
+  left: 60%;
+  height: 90%;
+  width: 40%;
   border-style: none;
   text-align: left;
+  overflow: auto
 }
 
 #innerbox3 span:nth-of-type(3) {
   position: absolute;
-  top: 180px;
-  left: 50px;
-  width: 640px;
-  height: 360px;
+  top: 20%;
+  left: 3%;
+  width: 50%;
+  height: 60%;
   border-style: none;
   background-image: url(../images/loading.png);
   background-size: 100%;
 }
 
+/* #endregion */
+/* #region 作品4内容 */
 #innerbox4 video {
   height: 270px;
   width: 540px;
@@ -936,3 +1008,24 @@ li {
   background-image: url(../images/loading.png);
   background-size: 100%;
 }
+
+/* #endregion */
+/* #endregion */
+/* #region 建筑 */
+.build {
+  position: absolute;
+  left: 2700px;
+  height: 600px;
+  width: 500px;
+  background-color: #ffffff;
+}
+
+.end {
+  position: absolute;
+  left: 5700px;
+  height: 600px;
+  width: 500px;
+  background-color: #ffffff;
+}
+
+/* #endregion */
