@@ -1,14 +1,31 @@
+//#region 变量
+//#region 上方和右侧方块
 var me = document.querySelector('#me');
 var gif = document.querySelector('#me').querySelector('span');
 var gamed = document.querySelector('#head1');
 var iss = document.querySelector('#head2');
 var keer1 = document.querySelector('#head3');
+var keer2 = document.querySelector('#right3')
+var arch = document.querySelector('#right1')
+var boxes = document.querySelectorAll('.box');
+//#endregion
+//#region 原始坐标
 var originmeX = originX(me);
 var originmeY = originY(me);
 var origingamedX = originX(gamed);
 var originissX = originX(iss);
+//#endregion
+//#region 游戏盒子
 var gameall = document.querySelector('.gameall');
+var tops = document.querySelector('.gameboxtop');
+var bottom = document.querySelector('.gameboxbottom');
+var botoms = bottom.children
+var box = document.querySelector('.gamebox');
+var headline = document.querySelector('.head');
+//#endregion
+//管道
 var tubes = document.querySelectorAll('.tube');
+//#region 跷跷板、相片与风扇
 var qqb = document.querySelector('.qqb');
 var pict = document.querySelector('.pict');
 var tx1 = document.querySelector('.tx1');
@@ -16,64 +33,117 @@ var tx4 = document.querySelector('.tx4');
 var tx5 = document.querySelector('.tx5');
 var fan = document.querySelector('.fan');
 var fanimg = document.querySelector('.fanimg');
+//#endregion
+//作品目录
 var content = document.querySelector('.content');
 var windows = content.children;
+//游戏主页
 var works = document.querySelectorAll('.work');
-var tops = document.querySelector('.gameboxtop');
-var bottom = document.querySelector('.gameboxbottom');
-var box = document.querySelector('.gamebox');
+var innerboxes = document.querySelectorAll('.innerbox');
+//游戏1
+var buttonred = document.querySelector('.buttonred');
+var redisright = document.querySelector('.redisright');
+//游戏3
+var buttongreen = document.querySelector('.button1');
+var drag = document.querySelector('.drag');
+//游戏4
+var concert = document.querySelector('.concert');
+//结束盒子
 var end = document.querySelector('.end');
+//开始提示语
 var start = document.querySelector('#start')
-var starts = document.querySelector('#start').querySelectorAll('h1');
-var keer2 = document.querySelector('#right3')
-var arch = document.querySelector('#right1')
+var starts = start.querySelectorAll('h1');
+var suggest = document.querySelector('.suggest')
+//技能树
 var trees = document.querySelector('.outtree').querySelectorAll('.tree');
 var trlis = document.querySelector('.outtree').querySelectorAll('li');
-var headline = document.querySelector('.head');
-var boxes = document.querySelectorAll('.box');
-var innerboxes = document.querySelectorAll('.innerbox');
+//游戏机底部
 var btns = document.querySelector('.rectangle').childNodes;
-
-//#region ----------给me\game\is小方块加向右位移--------------
-function originX(i) {
+//#endregion
+//#region 通用函数
+function originX(i) {//原始左边距
   return (parseInt(i['offsetLeft']));
 }
-function originY(i) {
+function originY(i) {//原始上边距
   return (parseInt(i['offsetTop']));
 }
-function relativeY(lastbtm, hi) {
+function relativeY(lastbtm, hi) {//me方块距离上方视口高度
   return (window.innerHeight - lastbtm - hi);
 }
-function movespeed(i, j) {
+function movespeed(i, j) {//速度公式
   return (i * (window.scrollY - j));
 }
-function movedownspeed(exscly, scly, lastbtm, hi, extop) {
+function movedownspeed(exscly, scly, lastbtm, hi, extop) {//me向下移动速度
   var top = relativeY(lastbtm, hi);
   var m = (exscly - scly) / (extop - top);
   var n = top - scly * (exscly - scly) / (extop - top)
   return (m * window.scrollY + n);
 }
+function changecolor(j, k, i) {//改变背景颜色
+  color = 'i'
+  j.style.backgroundColor = i;
+  k.style.backgroundColor = i;
+}
+function visibility(i, j) {//改变可视性
+  i.style.visibility = j;
+}
+function tubestyle(tube, iscolorful) {//水管背景图片更改
+  if (iscolorful == 1) {
+    tube.style.backgroundImage = 'url("../images/tube.png")';
+  } else if (iscolorful == null) {
+    tube.style.backgroundImage = 'none';
+  } else {
+    tube.style.backgroundImage = 'url("../images/tube2.png")';
+  }
+}
+function rotate(i, j, k) {//随滚动旋转
+  var degre = 0.4 * (window.scrollY - j);
+  i.style.transform = ' rotate(' + k * degre + 'deg)';
+}
+function scales(obj, x) {//鼠标经过放大事件
+  obj.addEventListener('mouseenter', function () {
+    this.style.transform = 'scale(' + x + ')'
+  })
+  obj.addEventListener('mouseleave', function () {
+    this.style.transform = 'scale(1)'
+  })
+}
+function animatedoor(obj, target, steptime, callback) {//门的动画
+  clearInterval(obj.timer);
+  obj.timer = setInterval(function () {
+    var step = (target - obj.offsetTop) / steptime;
+    step = step > 0 ? Math.ceil(step) : Math.floor(step);
+    if (obj.offsetTop >= target) {
+      clearInterval(obj.timer);
 
+      if (callback) {
+        callback();
+      } else {
+
+      }
+    }
+    obj.style.top = obj.offsetTop + step + 'px';
+  }, 30);
+}
+function geti(obj, li) {//线索循环找到对应项
+  for (k = 0; k < li.length; k++) {
+    if (obj == li[k]) {
+      break
+    }
+  }
+  return (k)
+}
+//#endregion
+//#region ----------给me\game\is小方块加向右位移--------------
 document.addEventListener('scroll', function () {
   if (window.scrollY < 1228) {
     me.style.left = movespeed(0.1, 0) + originmeX + 'px';
     gamed.style.left = movespeed(0.1, 0) + origingamedX + 'px';
     iss.style.left = movespeed(0.1, 0) + originissX + 'px';
-    //console.log(window.scrollY)
   }
 })
 //#endregion
 //#region -------------game和keer变红色；显示游戏box-----------------------------
-function changecolor(j, k, i) {
-  color = 'i'
-  j.style.backgroundColor = i;
-  k.style.backgroundColor = i;
-}
-function visibility(i, j) {
-  i.style.visibility = j;
-}
-
-
 document.addEventListener('scroll', function () {
   if (window.scrollY >= 1228) {
     changecolor(keer1, gamed, 'rgb(255, 32, 32)');
@@ -84,15 +154,7 @@ document.addEventListener('scroll', function () {
     visibility(gameall, 'hidden');
   }
 })
-function tubestyle(tube, iscolorful) {
-  if (iscolorful == 1) {
-    tube.style.backgroundImage = 'url("../images/tube.png")';
-  } else if (iscolorful == null) {
-    tube.style.backgroundImage = 'none';
-  } else {
-    tube.style.backgroundImage = 'url("../images/tube2.png")';
-  }
-}
+
 document.addEventListener('scroll', function () {
   if (window.scrollY >= 1450 && window.scrollY < 1650) {
     tubestyle(tubes[0], 0)
@@ -126,7 +188,6 @@ var y = 0
 var y1 = 0
 var mex = 0
 document.addEventListener('scroll', function () {
-
   if (window.scrollY >= 1300 &&
     me.getBoundingClientRect().top <= qqb.getBoundingClientRect().top) {//上一段运动，me与跷跷板相遇前
 
@@ -167,131 +228,13 @@ document.addEventListener('scroll', function () {
   }
 })
 //#endregion
-//#region --------给跷跷板加旋转-----------
-var qqby = 0//跷跷板与人相遇的Y
-var fany = 0//风扇与人相遇的y
-document.addEventListener('scroll', function () {
-  if (me.getBoundingClientRect().top <= tx1.getBoundingClientRect().top) {
-    qqby = window.scrollY
-  }
-  if (me.getBoundingClientRect().top <= fan.getBoundingClientRect().top) {
-    fany = window.scrollY
-  }
-})
-
-function rotate(i, j, k) {
-  var degre = 0.4 * (window.scrollY - j);
-  i.style.transform = ' rotate(' + k * degre + 'deg)';
-
-}
-//#endregion
-//#region ----------给照片加旋转-----------
-
-document.addEventListener('scroll', function () {
-  if (window.scrollY >= 2268) {
-    rotate(pict, 2268, -0.2)
-  } else {
-    qqb.style.transform = 'rotate(0deg)';
-  }
-})
-//#endregion
-//#region 目录交互
-//---------给tx1加向上位移-------
-
-var originTx1Y = originY(tx1);
-document.addEventListener('scroll', function () {
-  if (me.getBoundingClientRect().top >= tx1.getBoundingClientRect().top) {
-    rotate(qqb, qqby, -1);
-    // console.log('new' + qqby)
-    if (movespeed(-1, qqby) + originTx1Y < 0.111 * tx1.parentElement.offsetHeight) {
-      tx1.style.top = 0.111 * tx1.parentElement.offsetHeight + 'px';
-      // console.log(1)
-    } else {
-      tx1.style.top = Math.min(movespeed(-1, qqby) + originTx1Y, 0.111 * tx1.parentElement.offsetHeight) + 'px';
-      // console.log(2)
-    }
-  } else {
-    tx1.style.top = originTx1Y + 'px';
-    qqb.style.transform = 'rotate(0deg)';
-    // console.log(window.scrollY - tx1.offsetTop - 0.027 * box.offsetHeight, me.offsetTop)
-  }
-})
-//--------给tx4\tx5加向右位移--------
-
-
-var originTx4X = originX(tx4);
-var originTx5X = originX(tx5);
-document.addEventListener('scroll', function () {
-  if (me.getBoundingClientRect().top >= fan.getBoundingClientRect().top) {
-    tx4.style.left = Math.min(movespeed(3, fany) + originTx4X, 860) + 'px';
-    tx5.style.left = Math.min(movespeed(3, fany) + originTx5X, 930) + 'px';
-    fan.style.transform = 'rotate(-30deg)';
-    fanimg.style.backgroundImage = 'url("../images/fan.gif")'
-  } else {
-    tx4.style.left = originTx4X + 'px';
-    tx5.style.left = originTx5X + 'px';
-    fan.style.transform = 'rotate(30deg)';
-    fanimg.style.backgroundImage = 'url("../images/fan.png")'
-  }
-})
-//--------给door增加悬停交互动画----------
-function scales(obj, x) {
-  obj.addEventListener('mouseenter', function () {
-    this.style.transform = 'scale(' + x + ')'
-  })
-  obj.addEventListener('mouseleave', function () {
-    this.style.transform = 'scale(1)'
-  })
-}
-function animatedoor(obj, target, steptime, callback) {
-  clearInterval(obj.timer);
-  obj.timer = setInterval(function () {
-    var step = (target - obj.offsetTop) / steptime;
-    step = step > 0 ? Math.ceil(step) : Math.floor(step);
-    if (obj.offsetTop >= target) {
-      clearInterval(obj.timer);
-
-      if (callback) {
-        callback();
-      } else {
-
-      }
-    }
-    obj.style.top = obj.offsetTop + step + 'px';
-  }, 30);
-}
-
-for (i = 0; i < windows.length; i++) {
-  windows[i].addEventListener('mouseenter', function () {
-    var door = this.firstElementChild;
-    var topbox = this.lastElementChild;
-    animatedoor(door, 0, 5, function () {
-    }
-    )
-    visibility(me, 'hidden'); visibility(topbox, 'hidden');
-    this.style.transform = ('scale(1.1)')
-  });
-  windows[i].addEventListener('mouseleave', function () {
-    var door = this.firstElementChild;
-    var topbox = this.lastElementChild;
-    animatedoor(door, -2000, 5, function () {
-    }
-    )
-    visibility(me, 'visible'); visibility(topbox, 'visible');
-    this.style.transform = ('scale(1)')
-  });
-}
-//#endregion
 //#region -----------给me方块加向右位移---------------------
-
 document.addEventListener('scroll', function () {
   var v = (btns[1].getBoundingClientRect().left - 0.25 * minusbtn - mex) / (6985 - y1);
-
   if (me.getBoundingClientRect().top - windows[2].getBoundingClientRect().top > 1.5 * windows[2].offsetHeight//me与绿盒子高差大于绿盒子1.5倍高度
     && me.getBoundingClientRect().left <= btns[1].getBoundingClientRect().left - 0.25 * minusbtn//me左侧小于等于红色按钮左侧一点儿
   ) {
     me.style.left = Math.max(mex, mex + v * (window.scrollY - y1)) + 'px';
-    // console.log('应该向右移动了', me.offsetLeft, mex)
   }
   if (me.getBoundingClientRect().left > btns[1].getBoundingClientRect().left - 0.25 * minusbtn//me左侧大于红色按钮左侧一点（起跳前夕）
     &&
@@ -300,15 +243,12 @@ document.addEventListener('scroll', function () {
     y3 !== 0 && window.scrollY <= y3//me刚好走到头时最大，否则等于window.scrollY
   ) {
     v = minusbtn / 3400
-    // me.style.left = Math.min(arch.getBoundingClientRect().left - 60, btns[1].getBoundingClientRect().left - 0.25 * minusbtn + v * (window.scrollY - 6985)) + 'px';//me取走到头的值和位移中小的
-    // me.style.left = Math.max(mex, btns[1].getBoundingClientRect().left - 0.25 * minusbtn + v * (window.scrollY - 6985)) + 'px';//me取原始x与位移下之中大的
     if (mex > btns[1].getBoundingClientRect().left - 0.25 * minusbtn + v * (window.scrollY - 6985)) {
       me.style.left = mex + 'px'
     } else {
       me.style.left = Math.min(arch.getBoundingClientRect().left - 60, btns[1].getBoundingClientRect().left - 0.25 * minusbtn + v * (window.scrollY - 6985)) + 'px';
 
     }
-    // console.log('应该向右移动第二次了', me.offsetLeft)
   }
 })
 //--------给me方块添加动画5090-------
@@ -353,16 +293,95 @@ document.addEventListener('scroll', function () {
   for (i = 0, j = 1; i < windows.length; i++, j += 2) {
     if (ifup(btns[j], -0.25, 0)) {
       up(me, btns[j], 2, -0.25)
-      console.log(i + '前半段')
+      // console.log(i + '前半段')
       break;
     }
     if (ifup(btns[j], 0, 0.25)) {
       down(me, btns[j], 2, 0.25)
-      console.log(i + '后半段')
+      // console.log(i + '后半段')
       break;
     }
   }
 })
+//#endregion
+//#region --------给跷跷板加旋转-----------
+var qqby = 0//跷跷板与人相遇的Y
+var fany = 0//风扇与人相遇的y
+document.addEventListener('scroll', function () {
+  if (me.getBoundingClientRect().top <= tx1.getBoundingClientRect().top) {
+    qqby = window.scrollY
+  }
+  if (me.getBoundingClientRect().top <= fan.getBoundingClientRect().top) {
+    fany = window.scrollY
+  }
+})
+//#endregion
+//#region ----------给照片加旋转-----------
+document.addEventListener('scroll', function () {
+  if (window.scrollY >= 2268) {
+    rotate(pict, 2268, -0.2)
+  } else {
+    qqb.style.transform = 'rotate(0deg)';
+  }
+})
+//#endregion
+//#region 目录交互
+//---------给tx1加向上位移-------
+var originTx1Y = originY(tx1);
+document.addEventListener('scroll', function () {
+  if (me.getBoundingClientRect().top >= tx1.getBoundingClientRect().top) {
+    rotate(qqb, qqby, -1);
+    // console.log('new' + qqby)
+    if (movespeed(-1, qqby) + originTx1Y < 0.111 * tx1.parentElement.offsetHeight) {
+      tx1.style.top = 0.111 * tx1.parentElement.offsetHeight + 'px';
+      // console.log(1)
+    } else {
+      tx1.style.top = Math.min(movespeed(-1, qqby) + originTx1Y, 0.111 * tx1.parentElement.offsetHeight) + 'px';
+      // console.log(2)
+    }
+  } else {
+    tx1.style.top = originTx1Y + 'px';
+    qqb.style.transform = 'rotate(0deg)';
+    // console.log(window.scrollY - tx1.offsetTop - 0.027 * box.offsetHeight, me.offsetTop)
+  }
+})
+//--------给tx4\tx5加向右位移--------
+var originTx4X = originX(tx4);
+var originTx5X = originX(tx5);
+document.addEventListener('scroll', function () {
+  if (me.getBoundingClientRect().top >= fan.getBoundingClientRect().top) {
+    tx4.style.left = Math.min(movespeed(3, fany) + originTx4X, 860) + 'px';
+    tx5.style.left = Math.min(movespeed(3, fany) + originTx5X, 930) + 'px';
+    fan.style.transform = 'rotate(-30deg)';
+    fanimg.style.backgroundImage = 'url("../images/fan.gif")'
+  } else {
+    tx4.style.left = originTx4X + 'px';
+    tx5.style.left = originTx5X + 'px';
+    fan.style.transform = 'rotate(30deg)';
+    fanimg.style.backgroundImage = 'url("../images/fan.png")'
+  }
+})
+//--------给door增加悬停交互动画----------
+for (i = 0; i < windows.length; i++) {
+  windows[i].addEventListener('mouseenter', function () {
+    var door = this.firstElementChild;
+    var topbox = this.lastElementChild;
+    animatedoor(door, 0, 5, function () {
+    }
+    )
+    visibility(me, 'hidden'); visibility(topbox, 'hidden');
+    this.style.transform = ('scale(1.1)')
+  });
+  windows[i].addEventListener('mouseleave', function () {
+    var door = this.firstElementChild;
+    var topbox = this.lastElementChild;
+    animatedoor(door, -2000, 5, function () {
+    }
+    )
+    visibility(me, 'visible'); visibility(topbox, 'visible');
+    this.style.transform = ('scale(1)')
+  });
+}
 //#endregion
 //#region 卡带与跳转
 //----------按钮的动画----------------------
@@ -385,10 +404,7 @@ function ifbtn(obj, obj2, work) {
 
   }
 }
-//---------------监听按钮-------------------------
-
 //----------调取作品-----------
-
 document.addEventListener('scroll', function () {
   ifbtn(btns[1], btns[3], works[0]);
   ifbtn(btns[3], btns[5], works[1]);
@@ -408,8 +424,6 @@ window.onload = function () {
 window.onresize = function () {
   targ = targleft(191)
 }
-
-
 document.addEventListener('scroll', function () {
   if (me['offsetLeft'] >= window.innerWidth - 80 - 161 - 120) {
     keer2.style.left = (me['offsetLeft'] - (window.innerWidth - 80 - 120)) + 'px';
@@ -453,11 +467,10 @@ function left(obj, x, y) {
 
 document.addEventListener('scroll', function () {//全体游戏盒子向左向右
   var speed = -0.1
-  var botoms = bottom.children
   if (me.offsetLeft < arch.getBoundingClientRect().left - 62) {//me还没走到头
     y3 = window.scrollY
     speed = 0.1
-    console.log('盒子应该向左')
+    // console.log('盒子应该向左')
   }
   left(botoms[1], speed, 0.9 * window.innerWidth * 0.016)
   left(botoms[2], speed, 0.9 * window.innerWidth * 0.895)
@@ -497,21 +510,13 @@ document.addEventListener('scroll', function () {
 })
 //#endregion
 //#region ---------小树点击动画-----------
-function geti(obj, li) {//线索循环找到对应项
-  for (k = 0; k < li.length; k++) {
-    if (obj == li[k]) {
-      break
-    }
-  }
-  return (k)
-}
-
 for (i = 0; i < trees.length; i++) {
   scales(trees[i], 1.1)
   trees[i].addEventListener('click', function () {
     this.style.backgroundImage = 'url(../images/tree' + (geti(this, trees) + 1) + '.gif)'
   })
 }
+
 //----------art------
 trees[0].addEventListener('click', function () {
   animatedoor(trlis[0], 50, 7); animatedoor(trlis[1], 150, 3);
@@ -551,34 +556,29 @@ for (i = 0, j = 1; i < windows.length; i++, j += 2) {
     }),
     scales(btns[j], 1.2)
 }
-
+//#endregion
 //#region -----PLAY按钮-----
-var buttonred = document.querySelector('.buttonred');
-var button1 = document.querySelector('.button1');
-var locationwork = [window.scrollY > 8744 && window.scrollY < 8744 + 3400,
-window.scrollY > 8744 + 3400 && window.scrollY < 8744 + 3400 * 2,
-window.scrollY > 8744 + 3400 * 2 && window.scrollY < 8744 + 3400 * 3,
-window.scrollY > 8744 + 3400 * 3 && window.scrollY < 8744 + 3400 * 4]
+var locationwork = [window.scrollY > 8744 && window.scrollY < 8744 + 3400,//红
+window.scrollY > 8744 + 3400 && window.scrollY < 8744 + 3400 * 2,//黄
+window.scrollY > 8744 + 3400 * 2 && window.scrollY < 8744 + 3400 * 3,//绿
+window.scrollY > 8744 + 3400 * 3 && window.scrollY < 8744 + 3400 * 4]//紫
 scales(buttonred, 1.2)
-scales(button1, 1.2)
+scales(buttongreen, 1.2)
 document.addEventListener('scroll', function () {
-  if (locationwork[0]) {//红色PLAY按钮旋转
-    rotate(buttonred, 8744, -0.1)
+  // console.log(window.scrollY);
+  if (locationwork[0]) {
+    rotate(buttonred, 8744, -0.1);
   } else {
     buttonred.style.transform = 'rotate(0deg)';
   }
   if (locationwork[2]) {//绿色PLAY按钮旋转
-    rotate(button1, 8744 + 3400 * 2, -0.1)
+    rotate(buttongreen, 8744 + 3400 * 2, -0.1)
   } else {
-    button1.style.transform = 'rotate(0deg)';
+    buttongreen.style.transform = 'rotate(0deg)';
   }
 })
 //#endregion
 //#region ---------视频暂停-----------
-var redisright = document.querySelector('.redisright');
-var drag = document.querySelector('.drag');
-var concert = document.querySelector('.concert');
-
 document.addEventListener('scroll', function () {
   if (locationwork[0]) {//红色播放视频链接与停止
     redisright.src = 'https://www.youtube.com/embed/Twhcujuxp0k?si=_JLrxcRNkwBzgdKR'
@@ -597,23 +597,8 @@ document.addEventListener('scroll', function () {
   }
 })
 //#endregion
-//#endregion
 //#region 自适应大小
-
-// var resizing = 1
-// document.addEventListener('scroll', function () {
-
-//   if (resizing == false) {
-//     percentx = me.offsetLeft / window.innerWidth
-//   }
-
-//   console.log(percentx)
-//   resizing = false
-// })
 function rsize() {//调整视口自适应尺寸
-  // resizing = true;
-  // me.style.left = percentx * window.innerWidth + 'px'
-
   pict.style.height = pict.offsetWidth + 'px';
   for (i = 0; i < trees.length; i++) {
     trees[i].style.height = trees[i].offsetWidth + 'px'
@@ -632,28 +617,11 @@ function rsize() {//调整视口自适应尺寸
   for (i = 1; i < innerboxes.length; i += 2) {
     btns[i].style.fontSize = window.innerWidth / 1920 * 18 + 'px'
   }
-  console.log(me.offsetLeft, me.offsetTop)
-  // if (me.offsetLeft < 0 || me.getBoundingClientRect().top > window.innerHeight ||
-  //   me.offsetTop !== relativeY(40, 60) && me.offsetLeft > btns[1].getBoundingClientRect().left - 0.25 * minusbtn
-  // ) {
-  //   location.reload()
-  //   // }
-  // }
 }
 window.addEventListener('resize', rsize)
 window.addEventListener('load', rsize)
-document.addEventListener('scroll', winScroll, false)
-function winScroll() {
-  detectZoom()
-  // for (i = 0; i < innerboxes.length; i++) {
-  //   if (window.scrollX > 0) {
-  //     // console.log(tops.offsetLeft, innerboxes[i].firstElementChild.offsetLeft)
-  //     innerboxes[i].firstElementChild.style.left = -window.scrollX + 0.02 * window.innerWidth + 'px'
-  //   }
-  // }
-
-}
-//#endregion
+document.addEventListener('scroll', detectZoom)
+document.addEventListener('load', detectZoom)
 function detectZoom() {
   var ratio = 0,
     screen = window.screen,
@@ -670,9 +638,13 @@ function detectZoom() {
   if (ratio) {
     ratio = Math.round(ratio * 100)
   }
-  // if (ratio < 80 || ratio > 110) {
-  //   alert('当前窗口缩放比例为' + ratio + '%,建议调整至100%左右以获得最佳浏览体验')
-  // }
+  if (ratio !== 100) {
+    console.log('eeeeee')
+    suggest.style.display = 'block'
+    suggest.innerHTML = '<p>The current window zoom ratio is' + ratio + '%,<br>it is recommended to be adjusted to 100% for the best experience</p>'
+  } else {
+    suggest.style.display = 'none'
+  }
   return ratio / 100
 }
 // document.addEventListener('scroll', function () {
@@ -692,3 +664,4 @@ function detectZoom() {
 
 //   }
 // })
+//#endregion

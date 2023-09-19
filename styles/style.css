@@ -75,6 +75,19 @@ li {
   letter-spacing: 15px;
 }
 
+.suggest {
+  position: fixed;
+  top: 10%;
+  left: 30%;
+  height: 10%;
+  width: 40%;
+  color: white;
+  line-height: 50px;
+  display: none;
+  text-align: center;
+  font-family: 'Noto Sans SC', Courier, monospace;
+}
+
 /*#endregion*/
 /*#region box通用样式*/
 .box {
