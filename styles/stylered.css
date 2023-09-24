@@ -16,14 +16,18 @@ em {
 
 }
 
+u {
+    color: red;
+    font-weight: 700;
+}
+
 .bg,
-.tele {
+.tele,
+.camera {
     position: fixed;
     top: 5%;
-    /* left: 20px; */
     left: 50%;
     height: 60%;
-    /* height: 50%; */
     background-repeat: no-repeat;
 
 }
@@ -33,6 +37,36 @@ em {
     width: 80%;
     background-image: url(../redimage/background2.png);
     background-size: 100% 100%;
+}
+
+.camera {
+    margin-left: -40%;
+    width: 80%;
+    background-image: url(../redimage/camera.png);
+    background-size: 100% 100%;
+    z-index: 4;
+    /* display: none; */
+    visibility: hidden;
+    opacity: 0;
+    transition-duration: 1s;
+    transition-delay: 1s;
+}
+
+.camera div {
+    height: 7%;
+    width: 7%;
+    position: absolute;
+    bottom: 15%;
+    background-image: url(../redimage/UPLOAD1.png);
+    background-size: 100% 100%;
+}
+
+.camera div:nth-of-type(1) {
+    right: 18%;
+}
+
+.camera div:nth-of-type(2) {
+    left: 18%;
 }
 
 .bg {
@@ -156,11 +190,10 @@ em {
 
 .clue1 {
     position: absolute;
-    background-color: #ffe1e1;
+    background-color: #c6ab93;
     border-radius: 25%;
-    border: 3px solid rgb(165, 10, 10);
+    border: 3px solid #321a03;
     box-shadow: 2px 2px 8px #00000060;
-    transform-origin: bottom;
     font-size: 12px;
     overflow: hidden;
     transition-duration: 0.2s;
@@ -183,11 +216,13 @@ em {
 }
 
 #clue1-1 {
-    height: 10%;
+    height: 13%;
     width: 18%;
-    left: 75%;
-    top: 42%;
+    left: 8%;
+    top: 12%;
+    transform-origin: top left;
     line-height: 20px;
+
 }
 
 #clue1-1 span {
@@ -196,10 +231,11 @@ em {
 
 #clue1-2 {
     height: 10%;
-    width: 20%;
-    left: 8%;
-    top: 12%;
+    width: 16%;
+    left: 75%;
+    top: 42%;
     line-height: 15px;
+    transform-origin: bottom right;
 }
 
 #clue1-2 span {
@@ -225,13 +261,15 @@ em {
 #clue1-3,
 #clue1-4 {
     display: none;
+    transform-origin: bottom left;
 }
 
 #clue1-5 {
-    height: 8%;
+    height: 12%;
     width: 20%;
     left: 35%;
-    top: 63%;
+    top: 60%;
+    transform-origin: bottom left;
 }
 
 #clue1-6 {
@@ -239,6 +277,7 @@ em {
     width: 25%;
     left: 91%;
     top: 45%;
+    transform-origin: bottom right;
 }
 
 #clue1-5 span {
@@ -417,7 +456,8 @@ ul {
 
 .blk {
     position: absolute;
-    background-color: black;
+    /* background-color: black; */
+    transition-duration: 1.5s;
 }
 
 .scr1 .blk1 {
@@ -490,6 +530,7 @@ ul {
     background-image: url(../redimage/picture1.png);
     background-size: 253% 100%;
     transition-duration: 2s;
+    background-repeat: no-repeat;
 }
 
 /* x=253%y
@@ -504,7 +545,6 @@ x=253%z/40%=   2.53z/0.4 */
     left: 10%;
     top: 12%;
     background-position: 6.02% 12%;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
 
 }
 
@@ -524,8 +564,7 @@ x=253%z/40%=   2.53z/0.4 */
     left: 130%;
     top: 12%;
     background-size: 632.5% 109.65%;
-    background-position: 61% 140%;
-
+    background-position: 61% 140%
 }
 
 .picture3 {
@@ -545,7 +584,7 @@ x=253%z/40%=   2.53z/0.4 */
     top: 25%;
     background-size: 632.5% 109.65%;
     background-position: 90.5% 280%;
-
+    overflow: hidden;
 }
 
 .board {
@@ -557,43 +596,45 @@ x=253%z/40%=   2.53z/0.4 */
     background-color: #ffe1e136;
     border: 2px dashed rgb(255, 255, 255);
     transition-duration: 0.5s;
-    color: #a87c29;
+    color: #ffffff;
     overflow: hidden;
+    text-align: center;
 }
 
 .board1 {
-    left: 18%;
-    top: 68%;
+    left: 30%;
+    top: 33%;
     height: 7%;
-    width: 25%;
+    width: 10%;
+    rotate: 10deg;
 }
 
 .board2 {
-    height: 6%;
-    width: 15%;
-    left: 88%;
-    top: 93%;
+    height: 8%;
+    width: 10%;
+    left: 89%;
+    top: 66%;
 }
 
 .board3 {
     height: 7%;
     width: 15%;
-    left: 140%;
-    top: 91%;
+    left: 145%;
+    top: 73%;
 }
 
 .board4 {
     height: 7%;
-    width: 15%;
-    left: 37.5%;
-    top: 91%;
+    width: 10%;
+    left: 43%;
+    top: 73%;
 }
 
 .board5 {
-    height: 15%;
+    height: 5%;
     width: 10%;
-    left: 130%;
-    top: 80%;
+    left: 115%;
+    top: 43%;
 }
 
 .grey {
@@ -604,10 +645,11 @@ x=253%z/40%=   2.53z/0.4 */
     display: none;
 }
 
+
 .board div {
     padding-top: 0;
     padding-left: 2px;
-    font-size: 12px;
+    font-size: 18px;
     visibility: hidden;
 
 }
@@ -655,4 +697,138 @@ x=253%z/40%=   2.53z/0.4 */
     background-repeat: no-repeat;
     opacity: 0.3;
     transition-duration: 1s;
+}
+
+.picture span {
+    transition-duration: 0.5s;
+}
+
+.picture1 span {
+    height: 50%;
+    width: 50%;
+    background-image: url(../redimage/picture2.png);
+    background-size: 1565% 664%;
+    display: none;
+    position: absolute;
+    border: 4px solid black;
+    transition-duration: 0.2s;
+}
+
+.picture1 span:nth-of-type(2) {
+    background-position: 6.02% 8.5%;
+    left: 50%;
+    top: 0;
+}
+
+.picture1 span:nth-of-type(3) {
+    background-position: 14.42% 9%;
+    left: 0;
+    top: 50%;
+}
+
+.picture1 span:nth-of-type(1) {
+    background-position: 6.2% 45%;
+    left: 0;
+    top: 0;
+}
+
+.picture1 span:nth-of-type(4) {
+    background-position: 14.42% 45%;
+    left: 50%;
+    top: 50%;
+}
+
+.picture2 span {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-size: 632.5% 102%;
+    background-position: 35% 100%;
+}
+
+.picture2 span:nth-of-type(1) {
+    background-image: url(../redimage/picture3.png);
+
+}
+
+.picture2 span:nth-of-type(2) {
+    background-image: url(../redimage/picture4.png);
+    transform: rotate(55deg);
+    transform-origin: 60% 80%;
+}
+
+.picture3 span,
+.picture4 span {
+    position: absolute;
+    height: 33.3%;
+    width: 100%;
+    background-size: 632.5% 328.95%;
+    background-image: url(../redimage/picture3.png);
+
+}
+
+.picture3 span:nth-of-type(1) {
+    background-position: 55% 20%;
+}
+
+.picture3 span:nth-of-type(2) {
+    background-position: 55% 60%;
+}
+
+.picture3 span:nth-of-type(3) {
+    background-position: 55% 105%;
+}
+
+.picture4 span:nth-of-type(1) {
+    background-position: 61% 20%
+}
+
+.picture4 span:nth-of-type(2) {
+    background-position: 61% 60%
+}
+
+.picture4 span:nth-of-type(3) {
+    background-position: 61% 105%
+}
+
+.picture3 span:nth-of-type(1),
+.picture4 span:nth-of-type(1) {
+    top: 0;
+}
+
+.picture3 span:nth-of-type(2),
+.picture4 span:nth-of-type(2) {
+    top: 33.3%
+}
+
+.picture3 span:nth-of-type(3),
+.picture4 span:nth-of-type(3) {
+    top: 66.6%
+}
+
+.picture5 span {
+    background-image: url(../redimage/picture4.png);
+    background-size: 1265% 438.6%;
+    background-position: 86.5% 165%;
+    height: 25%;
+    width: 50%;
+    position: absolute;
+    border: 5px solid black;
+    left: 20%;
+    top: 7%;
+    transform: rotate(90deg);
+}
+
+.endall {
+    position: fixed;
+    top: 115%;
+    left: 50%;
+    background-repeat: no-repeat;
+    width: 60%;
+    height: 240%;
+    background-image: url(../redimage/end.png);
+    margin-left: -30%;
+    background-size: 100% 100%;
+    z-index: 6;
+    /* display: none; */
 }

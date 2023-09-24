@@ -20,6 +20,26 @@ function animatetop(obj, target, steptime, callback) {//苹果动画
         obj.style.top = obj.offsetTop + step + 'px';
     }, 30);
 }
+function animateend(obj, target, steptime, callback) {//苹果动画
+    clearInterval(obj.timer);
+    // console.log(target, target * obj.parentElement.offsetHeight, obj.offsetTop)
+    target = target * window.innerHeight
+    // console.log(obj.parentElement.offsetHeight)
+    obj.timer = setInterval(function () {
+        var step = (target - obj.offsetTop) / steptime;
+        step = step > 0 ? Math.ceil(step) : Math.floor(step);
+        if (obj.offsetTop <= target) {
+            clearInterval(obj.timer);
+
+            if (callback) {
+                callback();
+            } else {
+
+            }
+        }
+        obj.style.top = obj.offsetTop + step + 'px';
+    }, 35);
+}
 function toolleft(obj, target, targettop, steptime, callback) {//工具箱动画
     clearInterval(obj.timer);
     // console.log(target, target * obj.parentElement.offsetHeight, obj.offsetTop)
@@ -123,6 +143,12 @@ function getpagey(obj) {//找到上视口间距
 function distancex(x, y, m, n) {//条件判断表达式
     return (getpagex(x) > getpagex(y) - m && getpagex(x) < getpagex(y) + n)
 }
+function distx(x, y, m, n) {//条件判断表达式
+    return (x.offsetLeft > y.offsetLeft - m && x.offsetLeft < y.offsetLeft + n)
+}
+function disty(x, y, m, n) {//条件判断表达式
+    return (x.offsetTop > y.offsetTop - m && x.offsetTop < y.offsetTop + n)
+}
 function distancey(x, y, m, n) {//条件判断表达式
     return (getpagey(x) > getpagey(y) - m && getpagey(x) < getpagey(y) + n)
 }
@@ -143,11 +169,13 @@ function picstyle(i) {//图片背景链接
 function blk() {//黑色马赛克事件
     if (isred) {
         for (i = 0; i < blks.length; i++) {
-            blks[i].style.visibility = 'visible'
+            // blks[i].style.visibility = 'visible'
+            blks[i].style.opacity = '1'
         }
     } else {
         for (i = 0; i < blks.length; i++) {
-            blks[i].style.visibility = 'hidden'
+            // blks[i].style.visibility = 'hidden'
+            blks[i].style.opacity = '0'
         }
     }
     if (clear(isboard)) {
@@ -178,6 +206,9 @@ function rsize() {//调整视口自适应尺寸
         bg[1].style.height = bg[1].offsetWidth + 'px'
         scrclue1.style.height = scrclue1.offsetWidth + 'px'
         tele.style.height = 1.13 * scrclue1.offsetWidth + 'px'
+        endall.style.height = 3 * window.innerHeight + 'px'
+        endall.style.width = 1 / 3 * endall.offsetHeight + 'px'
+        camera.style.height = 1.13 * scrclue1.offsetWidth + 'px'
         scrclue1.parentElement.style.height = scrclue1.parentElement.offsetWidth + 'px'
         scrclue2.style.height = scrclue2.offsetWidth + 'px'
         scrclue2.parentElement.style.height = scrclue2.parentElement.offsetWidth + 'px'
@@ -194,7 +225,7 @@ function getRandomInt(min, max) {//随机整数
     return Math.floor(Math.random() * (max - min)) + min;
 }
 function gettx(obj, tx) {//旁白文字
-    var isvisible = false
+
     for (i = 0; i < obj.length; i++) {
         obj[i].addEventListener('click', function () {
             pangbai.innerHTML = tx[getRandomInt(0, tx.length - 1)]
@@ -213,6 +244,53 @@ function gettx(obj, tx) {//旁白文字
                 isvisible = false
                 // console.log(2)
             }
+        })
+    }
+}
+function txobj(tx) {
+    pangbai.innerHTML = tx[getRandomInt(0, tx.length - 1)]
+    if (!isvisible) {
+        pangbai.style.transitionDelay = '0s'
+        pangbai2.style.transitionDelay = '2s'
+        pangbai.style.opacity = '1'
+        pangbai2.style.opacity = '1'
+        isvisible = true
+        // console.log(1)
+    }
+    else {
+        pangbai.style.transitionDelay = '2s'
+        pangbai2.style.transitionDelay = '0s'
+        pangbai.style.opacity = '0'
+        pangbai2.style.opacity = '0'
+        isvisible = false
+        // console.log(2)
+    }
+}
+var isvisible = false
+function gettxbycondition(obj, tx, e) {//提示语旁白文字
+    for (i = 0; i < obj.length; i++) {
+        obj[i].addEventListener(e, function () {
+            // console.log(tombopen)
+            if (tombopen && isred && !clear(isliter)) {
+                // console.log('有了')
+                pangbai.innerHTML = tx[getRandomInt(0, tx.length - 1)]
+                if (!isvisible) {
+                    pangbai.style.transitionDelay = '0s'
+                    pangbai2.style.transitionDelay = '2s'
+                    pangbai.style.opacity = '1'
+                    pangbai2.style.opacity = '1'
+                    isvisible = true
+                    // console.log(1)
+                } else {
+                    pangbai.style.transitionDelay = '2s'
+                    pangbai2.style.transitionDelay = '0s'
+                    pangbai.style.opacity = '0'
+                    pangbai2.style.opacity = '0'
+                    isvisible = false
+                    // console.log(2)
+                }
+            }
+
         })
     }
 }
@@ -253,9 +331,11 @@ var pangbai = document.querySelector('.pangbai')
 var pangbai2 = document.querySelector('.pangbai2')
 var setting = document.querySelector('.setting')
 var bgm = document.querySelector('.bgm')
+var camera = document.querySelector('.camera')
 var silent = false
 var yinxiao = document.querySelector('.yinxiao')
 var isend = false
+var endall = document.querySelector('.endall')
 //#endregion
 //#region --------------------------------------------旁白---------------------------------------
 var tx1 = ['It is not safe for children.<br>别让小孩看见。',//马赛克
@@ -276,9 +356,14 @@ var tx1 = ['It is not safe for children.<br>别让小孩看见。',//马赛克
 
 var tx2 = ['The human body itself is the measuring stick for the beauty of all things.<br>人体自身是测量万物美的标尺。',//文字
     'From primitiveness, to confinement, to revival, to...<br>从原始，到禁锢，到复兴，到……',
-    'When will Apple, trapped in a cyclical dream, wake up?<br>陷入循环之梦的苹果，何时能苏醒？',
     'I was born naked and it was you who was dirty.<br>我生来赤裸，肮脏的是你。']
 var tx3 = ['In human civilization, I am constantly being castrated and awakened.<br>我在人类文明中，不断被阉割，被唤醒。',]
+var tx4 = ['If..ask the apple?<br>或许……问问苹果？',
+    'Which one is the truth, this red world or the opposide one?<br>这个充满红色的世界，与对面，究竟孰真孰假？',
+    'red is right everywhere in this world.<br>红色在这个世界即为\"真理\"']
+var tx5 = ['Upload,censorship,and...<br>上传，审查，然后……']
+var tx6 = ['...come to death<br>……直到死亡']
+var tx7 = ['When will Apple, trapped in a cyclical dream, wake up?<br>陷入循环之梦的苹果，何时能苏醒？']
 //#endregion
 //#region --------------------------------------------鼠标经过交互----------------------------------------------
 scalearray(left, 90);
@@ -327,29 +412,46 @@ right.addEventListener('click', function () {//按钮箭头注册事件
 apple.addEventListener('click', function () {//苹果注册事件
     if ((apple['offsetTop'] / yadang.offsetHeight).toFixed(1) == 0.9) {
         isred = false
-        bg1.style.backgroundImage = 'url(../redimage/background3.png)'
-        bg2.style.backgroundImage = 'url(../redimage/background3.png)'
+        if (clear(isliter)) {
+            bg1.style.backgroundImage = 'url(../redimage/background4.png)'
+            bg2.style.backgroundImage = 'url(../redimage/background4.png)'
+        } else {
+            bg1.style.backgroundImage = 'url(../redimage/background3.png)'
+            bg2.style.backgroundImage = 'url(../redimage/background3.png)'
+        }
+
         yadang.style.backgroundImage = 'url(../redimage/yadang.png)'
         apple.style.backgroundImage = 'url(../redimage/apple2.png)'
         apple.style.transform = 'rotate(0deg)'
         animatetop(apple, 0.6, 1)
-        for (i = 0; i < clue1.length; i++) {
-            clue1[i].style.backgroundColor = '#c6ab93'
-            clue1[i].style.borderColor = '#321a03'
+        if (tombopen) {
+            for (i = 0; i < clue1.length; i++) {
+                clue1[i].style.visibility = 'visible'
+                clue1[i].style.opacity = '1'
+            }
+        } else {
+
         }
 
 
     } else {
         isred = true
-        bg1.style.backgroundImage = 'url(../redimage/background1.png)'
-        bg2.style.backgroundImage = 'url(../redimage/background1.png)'
+        if (clear(isliter)) {
+            bg1.style.backgroundImage = 'url(../redimage/background3.png)'
+            bg2.style.backgroundImage = 'url(../redimage/background3.png)'
+        } else {
+            bg1.style.backgroundImage = 'url(../redimage/background1.png)'
+            bg2.style.backgroundImage = 'url(../redimage/background1.png)'
+        }
         yadang.style.backgroundImage = 'url(../redimage/yadang2.png)'
         apple.style.backgroundImage = 'url(../redimage/apple1.png)'
         apple.style.transform = 'rotate(65deg)'
         animatetop(apple, 0.9, 3)
-        for (i = 0; i < clue1.length; i++) {
-            clue1[i].style.backgroundColor = '#ffe1e1'
-            clue1[i].style.borderColor = 'rgb(165, 10, 10)'
+        if (tombopen) {
+            for (i = 0; i < clue1.length; i++) {
+                clue1[i].style.visibility = 'hidden'
+                clue1[i].style.opacity = '0'
+            }
         }
 
 
@@ -392,8 +494,6 @@ document.addEventListener('click', function () {//未收集时点击交互状态
             //console.log('ok')
         }
         for (i = 0; i < clue1.length; i++) {
-            // if (i <= 2 && !isCollect1[i] || i > 2 && !isCollect1[i - 2]
-            //     || isCollect1[0] && isCollect1[1] && isCollect1[2] && isCollect1[3]) {
             //还没有收集对应的或收集完毕
             clue1[i].style.transform = 'scale(1)'
             //console.log('maopao')
@@ -523,7 +623,7 @@ for (i = 0; i < boards.length; i++) {//拖动盒子到指定简介盒子处并�
                         if (distancex(thistl, boards[a], 100, 200)
                             && distancey(thistl, boards[a], 50, 100)) {
                             thistl.style.visibility = 'hidden'
-                            picstyle(a)
+                            // picstyle(a)
                             boardstyle(a)
                             // console.log('success')
                             document.removeEventListener('mousemove', move)
@@ -547,8 +647,8 @@ for (i = 0; i < boards.length; i++) {//拖动盒子到指定简介盒子处并�
                             thistl.style.visibility = 'hidden'
                             boardstyle(a);
                             boardstyle(a + 1)
-                            picstyle(a)
-                            picstyle(a + 1)
+                            // picstyle(a)
+                            // picstyle(a + 1)
 
                             // console.log('success')
                             document.removeEventListener('mousemove', move)
@@ -567,7 +667,7 @@ for (i = 0; i < boards.length; i++) {//拖动盒子到指定简介盒子处并�
                             && distancey(thistl, boards[a + 1], 50, 100)) {
                             thistl.style.visibility = 'hidden'
                             boardstyle(a + 1)
-                            picstyle(a + 1)
+                            // picstyle(a + 1)
                             // console.log('success')
                             document.removeEventListener('mousemove', move)
                             blks[7].style.visibility = 'hidden'
@@ -613,8 +713,8 @@ document.addEventListener('click', function () {//简介盒子样式变化
                 } else {
 
                     boards[i].style.borderStyle = 'solid'
-                    boards[i].style.borderColor = '#855a0a'
-                    boards[i].style.backgroundColor = '#654305'
+                    boards[i].style.borderColor = '#855a0a00'
+                    boards[i].style.backgroundColor = '#65430500'
                     boards[i].firstElementChild.style.visibility = 'visible'
                 }
             }
@@ -624,6 +724,7 @@ document.addEventListener('click', function () {//简介盒子样式变化
 
 document.addEventListener('click', function () {//清空后出现字母
     if (clear(isboard)) {
+        tombsecond = false
         for (i = 0; i < tes.length; i++) {
             tes[i].style.visibility = 'visible'
             tes[i].style.color = 'rgb(255, 0, 0)'
@@ -641,7 +742,7 @@ apple.addEventListener('click', function () {//字母样式变化
 
         } else {
             for (i = 0; i < litters.length; i++) {
-                console.log('litter')
+                // console.log('litter')
                 litters[i].style.visibility = 'visible'
             }
         }
@@ -658,10 +759,12 @@ apple.addEventListener('click', function () {//字母样式变化
 
         }
     }
+
 })
 
 
-apple.addEventListener('click', function () {//picture三个阶段
+apple.addEventListener('click', pictureapple)
+function pictureapple() {//picture三个阶段
     var p = 0
     for (i = 0; i < isboard.length; i++) {
         if (i <= 2) {
@@ -669,18 +772,41 @@ apple.addEventListener('click', function () {//picture三个阶段
         } else {
             p = i - 1
         }
+        // if (clear(isliter)) {
+        //     apple.removeEventListener('click', pictureapple)
+        // }
         if (isboard[i] && !isliter[p]) {
-            pictures[i].style.backgroundImage = 'url(../redimage/picture2.png)'
+            if (isred) {
+                pictures[i].style.backgroundImage = 'url(../redimage/tomb.png)'
+                //console.log('2')
+            } else {
+                pictures[i].style.backgroundImage = 'url(../redimage/picture2.png)'
+                //console.log('3')
+            }
+
             //console.log('1')
-        } else if (isliter[p]) {
+        } else if (isliter[p] && !clear(isliter)) {
             if (isred) {
                 pictures[i].style.backgroundImage = 'url(../redimage/picture2.png)'
+                switch (p) {
+                    case 0:
+                    case 1:
+                        boards[i].style.display = 'none'
+                        break;
+                    case 2:
+                        boards[i].style.display = 'none'
+                        boards[i + 1].style.display = 'none'
+                        break;
+                    default:
+                        boards[i + 1].style.display = 'none'
+
+                }
                 //console.log('2')
             } else {
                 pictures[i].style.backgroundImage = 'url(../redimage/picture1.png)'
                 //console.log('3')
             }
-        } else {
+        } else if (!tombopen) {
             if (isred) {
                 pictures[i].style.backgroundImage = 'url(../redimage/picture1.png)'
                 //console.log('4')
@@ -688,9 +814,17 @@ apple.addEventListener('click', function () {//picture三个阶段
                 pictures[i].style.backgroundImage = 'url(../redimage/picture2.png)'
                 // console.log('5')
             }
+        } else {
+            if (isred) {
+                pictures[i].style.backgroundImage = 'url(../redimage/tomb.png)'
+                //console.log('4')
+            } else {
+                pictures[i].style.backgroundImage = 'url(../redimage/picture2.png)'
+                // console.log('5')
+            }
         }
     }
-})
+}
 
 for (i = 0; i < litters.length; i++) {//字母放大缩小，点击收集字母
     scales(litters[i])
@@ -751,6 +885,31 @@ document.addEventListener('click', function () {//点开后灰色蒙层
     }
 })
 
+document.addEventListener('click', changetobg4)
+function changetobg4() {
+    if (clear(isliter)) {
+        // console.log('这是bg4的切换')
+        bg1.style.backgroundImage = 'url(../redimage/background4.gif)'
+        bg2.style.backgroundImage = 'url(../redimage/background4.gif)'
+        document.removeEventListener('click', changetobg4)
+    }
+
+}
+document.addEventListener('click', lasttx)
+function lasttx() {
+    if (clear(isliter) && !isend) {
+        txobj(tx7)
+        // document.removeEventListener('click', lasttx)
+    }
+}
+// apple.addEventListener('click', function () {
+//     if (clear(isliter)) {
+// if(isred){
+//     bg1.style.backgroundImage = 'url(../redimage/background4.png)'
+//     bg2.style.backgroundImage = 'url(../redimage/background4.png)'
+// }
+//     }
+// })
 
 
 apple.addEventListener('click', function () {//结束隐藏盒子
@@ -778,6 +937,7 @@ apple.addEventListener('click', function () {//结束隐藏盒子
         isend = true
     }
 })
+var endcs = false
 apple.addEventListener('click', function () {//结束工具箱动画
     if (isend) {
         gettx(apple, tx3)
@@ -792,10 +952,372 @@ apple.addEventListener('click', function () {//结束工具箱动画
         toolleft(tos[2], -0.04, 0.5, 1);//T
         toolleft(tos[3], -0.28, 0.5, 1);//C
         toolleft(tes[3], 0.28, 0.5, 1);//E
+        endcs = true
     }
 })
+for (i = 0; i < tes.length; i++) {
+    tes[i].addEventListener('click', endgame)
+    tos[i].addEventListener('click', endgame)
+}
+function endgame() {
+    if (endcs) {
+        for (i = 0; i < tes.length; i++) {
+            tes[i].style.opacity = 0
+            tos[i].style.opacity = 0
+            tes[i].style.transitionDelay = '1s';
+            tos[i].style.transitionDelay = '1s';
+        }
+        // endall.style.display = 'block'
+        animateend(endall, -2, 500)
+    }
+}
+document.addEventListener('click', function () {
+    if (endall.offsetTop == -2 * window.innerHeight) {
+        endall.style.transitionDuration = '2s';
+        endall.style.opacity = 0
+    }
+})
+// window.addEventListener('load', function () {
+//     animateend(endall, -2, 500)
+// })
 //#endregion
 //#region -------------------------------自适应窗口-----------------------------------
 window.addEventListener('resize', rsize)
 window.addEventListener('load', rsize)
 //#endregion
+//#region chapter1
+var chapter1 = true
+// scalesli(pictures, 1.1)
+window.addEventListener('load', function () {//第一章出现时
+    for (i = 0; i < pictures.length - 1; i++) {
+        pictures[i].style.backgroundImage = 'none'
+    }
+    pictures[4].style.backgroundImage = 'url(../redimage/picture4.png)'
+    for (i = 0; i < pingtus.length; i++) {
+        pingtus[i].style.display = 'block'
+        positionpt[i] = [pingtus[i].offsetLeft, pingtus[i].offsetTop]
+    }
+    yadang.style.visibility = 'hidden'
+    yadang.style.opacity = '0'
+    for (i = 0; i < blks.length; i++) {
+        blks[i].style.visibility = 'hidden'
+        blks[i].style.opacity = '0'
+    }
+    for (i = 0; i < clue1.length; i++) {
+        clue1[i].style.visibility = 'hidden'
+        clue1[i].style.opacity = '0'
+    }
+    // console.log(positionpt[1][0])
+})
+window.addEventListener('resize', function () {
+    if (!isopentomb[0]) {
+        for (i = 0; i < pingtus.length; i++) {
+            positionpt[i] = [pingtus[i].offsetLeft, pingtus[i].offsetTop]
+        }
+    }
+})
+var positionpt = []
+var pingtus = pictures[0].querySelectorAll('span')
+var daweis = pictures[1].querySelectorAll('span')
+var clays = pictures[2].querySelectorAll('span')
+var clays2 = pictures[3].querySelectorAll('span')
+var huatu = pictures[4].querySelector('span')
+for (i = 0; i < pingtus.length; i++) {//拖动盒子到指定简介盒子处并显示简介
+    pingtus[i].addEventListener('mousedown', pingtufunc)
+}
+var isopentomb = [false, false, false, false]
+function pingtufunc(event) {//第一张 拼图
+
+    var a = 0
+    for (i = 0; i < pingtus.length; i++) {
+        if (pingtus[i] == thispt) {
+            a = i
+            break
+        }
+    }
+    var thispt = this
+    var x = event.pageX - this.offsetLeft;
+    var y = event.pageY - this.offsetTop;
+    // console.log(a + '已经进入未重复')
+
+
+    document.addEventListener('mousemove', move)
+    function move(e) {
+        thispt.style.left = e.pageX - x + 'px';
+        thispt.style.top = e.pageY - y + 'px';
+        // console.log(a + '在移动')
+
+    }
+    document.addEventListener('mouseup', ups)
+    function ups() {
+        // console.log('触发了' + a + 'up事件')
+        var xi = -1, yi = -1
+        for (i = 0; i < pingtus.length; i++) {
+            // xm = xo
+            // ym = yo
+            if (i != a) {
+                if (distx(pingtus[a], pingtus[i], 50, 50)
+                    && disty(pingtus[a], pingtus[i], 50, 50)) {
+                    xi = 1
+                    yi = 1
+                    // console.log('我现在点击了' + a + '并且与' + i + '交换', ',新的' + a + '的坐标为' + xo, yo, ';新的' + i + '的坐标为' + xi, yi)
+                    break
+                }
+            }
+        }
+        document.removeEventListener('mousemove', move)
+        if (xi !== -1 && yi !== -1) {
+            // console.log('交换成功')
+            // pingtus[i].removeEventListener('mousedown', pingtufunc)
+            pingtus[i].style.left = positionpt[a][0] + 'px'
+            pingtus[i].style.top = positionpt[a][1] + 'px'
+            pingtus[a].style.left = positionpt[i][0] + 'px'
+            pingtus[a].style.top = positionpt[i][1] + 'px'
+            midx = positionpt[a][0]
+            midy = positionpt[a][1]
+            positionpt[a][0] = positionpt[i][0]
+            positionpt[a][1] = positionpt[i][1]
+            positionpt[i][0] = midx
+            positionpt[i][1] = midy
+        } else {
+            // console.log('交换失败')
+            for (i = 0; i < pingtus.length; i++) {
+                pingtus[i].style.left = positionpt[i][0] + 'px'
+                pingtus[i].style.top = positionpt[i][1] + 'px'
+            }
+        }
+        if (pingtus[1].offsetLeft < pingtus[2].offsetLeft &&
+            pingtus[0].offsetLeft < pingtus[3].offsetLeft &&
+            pingtus[1].offsetTop < pingtus[0].offsetTop &&
+            pingtus[2].offsetTop < pingtus[3].offsetTop) {
+            // console.log('success')
+            isopentomb[0] = true
+            for (i = 0; i < pingtus.length; i++) {
+                pingtus[i].style.transitionDuration = '1s'
+                pingtus[i].style.opacity = '0'
+            }
+            pictures[0].style.backgroundImage = 'url(../redimage/picture2.png)'
+            this.removeEventListener
+            document.removeEventListener('mousemove', move)
+            document.removeEventListener('mousedown', pingtufunc)
+        }
+        document.removeEventListener('mouseup', ups)
+        event.stopPropagation()
+
+    }
+    // console.log(distx(thispt, pingtus[1], 20, 20), disty(thispt, pingtus[1], 20, 20))
+
+}
+document.addEventListener('mousedown', function (e) {
+    for (i = 0; i < pingtus.length; i++) {
+        for (j = 0; j < pingtus.length; j++) {
+            if (j !== i && distx(pingtus[j], pingtus[i], 20, 20) && disty(pingtus[j], pingtus[i], 20, 20)) {
+                pingtus[0].style.left = 0
+                pingtus[0].style.top = 0
+                pingtus[1].style.left = 50 + '%'
+                pingtus[1].style.top = 0
+                pingtus[2].style.left = 0
+                pingtus[2].style.top = 50 + '%'
+                pingtus[3].style.left = 50 + '%'
+                pingtus[3].style.top = 50 + '%'
+                // e.stopPropagation()
+            }
+        }
+    }
+})
+var rottime = 0
+daweis[1].addEventListener('click', function () {//第二张 旋转
+    switch (rottime) {
+        case 0:
+            this.style.transform = 'rotate(-15deg)'
+            rottime = 1
+            break;
+        case 1:
+            this.style.transform = 'rotate(-25deg)'
+            rottime = 2
+            break;
+        case 2:
+            this.style.transform = 'rotate(10deg)'
+            rottime = 3
+            break;
+        case 3:
+            this.style.transform = 'rotate(-35deg)'
+            rottime = 4
+            break;
+        case 4:
+            this.style.transform = 'rotate(0deg)'
+            rottime = 5
+            break;
+        default:
+            this.style.opacity = '0'
+            daweis[0].style.opacity = '0'
+            pictures[1].style.backgroundImage = 'url(../redimage/picture2.png)'
+            isopentomb[1] = true
+    }
+})
+var claytime = 0
+
+for (i = 0; i < clays.length; i++) {
+    clays[i].addEventListener('click', clay)
+    clays2[i].addEventListener('click', clay)
+}
+function clay() {//第三张 陶土
+    switch (claytime) {
+        case 0:
+            clays[0].style.backgroundImage = 'url(../redimage/picture4.png)'
+            clays2[0].style.backgroundImage = 'url(../redimage/picture4.png)'
+            claytime = 1
+            break;
+        case 1:
+            clays[1].style.backgroundImage = 'url(../redimage/picture4.png)'
+            clays2[1].style.backgroundImage = 'url(../redimage/picture4.png)'
+            claytime = 2
+            break;
+        case 2:
+            clays[2].style.backgroundImage = 'url(../redimage/picture4.png)'
+            clays2[2].style.backgroundImage = 'url(../redimage/picture4.png)'
+            claytime = 3
+            break;
+        default:
+            for (i = 0; i < clays.length; i++) {
+                clays[i].style.opacity = '0'
+                clays2[i].style.opacity = '0'
+            }
+            pictures[2].style.backgroundImage = 'url(../redimage/picture2.png)'
+            pictures[3].style.backgroundImage = 'url(../redimage/picture2.png)'
+            isopentomb[2] = true
+    }
+}
+var huatutime = 0
+huatu.addEventListener('click', function () {//第四张 旋转
+    switch (huatutime) {
+        case 0:
+            huatu.style.transform = 'rotate(180deg)'
+            huatutime = 1
+            break;
+        case 1:
+            huatu.style.transform = 'rotate(270deg)'
+            huatutime = 2
+            break;
+        case 2:
+            huatu.style.transform = 'rotate(360deg)'
+            huatutime = 3
+            break;
+        default:
+            huatu.style.display = 'none'
+            pictures[4].style.backgroundImage = 'url(../redimage/picture2.png)'
+            isopentomb[3] = true
+    }
+})
+document.addEventListener('click', first)
+function first() {//清空四个线索后显示picture2
+    if (clear(isopentomb)) {
+        // camera.style.display = 'block'
+        camera.style.visibility = 'visible'
+        camera.style.opacity = '1'
+        for (i = 0; i < pictures.length; i++) {
+            pictures[i].style.backgroundImage = 'url(../redimage/picture2.png)'
+        }
+        for (i = 0; i < pingtus.length; i++) {
+            pingtus[i].style.display = 'none'
+        }
+        for (i = 0; i < daweis.length; i++) {
+            daweis[i].style.display = 'none'
+        }
+        for (i = 0; i < clays.length; i++) {
+            clays[i].style.display = 'none'
+            clays2[i].style.display = 'none'
+        }
+        // console.log('还在')
+        document.removeEventListener('click', first)
+    }
+
+}
+var uploads = camera.querySelectorAll('div')
+var ispcture1 = false
+for (i = 0; i < uploads.length; i++) {//uploads点击后上传
+    uploads[i].addEventListener('mouseenter', function () {
+        for (i = 0; i < uploads.length; i++) {
+            uploads[i].style.backgroundImage = 'url(../redimage/UPLOAD2.png)'
+        }
+    })
+    uploads[i].addEventListener('mouseleave', function () {
+        for (i = 0; i < uploads.length; i++) {
+            uploads[i].style.backgroundImage = 'url(../redimage/UPLOAD1.png)'
+        }
+    })
+    uploads[i].addEventListener('click', function () {
+        camera.style.display = 'none'
+        for (i = 0; i < blks.length; i++) {
+            blks[i].style.visibility = 'visible'
+            blks[i].style.opacity = '1'
+        }
+        for (i = 0; i < pictures.length; i++) {
+            pictures[i].style.backgroundImage = 'url(../redimage/picture1.png)'
+        }
+        ispcture1 = true
+        // yadang.style.visibility = 'visible'
+        // yadang.style.opacity = '1'
+        // for (i = 0; i < clue1.length; i++) {
+        //     clue1[i].style.visibility = 'visible'
+        //     clue1[i].style.opacity = '1'
+        // }
+
+    })
+}
+for (i = 0; i < pictures.length; i++) {
+    pictures[i].addEventListener('click', istomb)
+    pictures[i].addEventListener('mouseenter', tombchange)
+    pictures[i].addEventListener('mouseleave', tombchangeback)
+    pictures[i].addEventListener('click', tombtx)
+}
+var tombopen = false
+var tombsecond = true
+function tombtx() {
+    if (ispcture1) {
+        txobj(tx6)
+        for (i = 0; i < pictures.length; i++) {
+            pictures[i].removeEventListener('click', tombtx)
+        }
+    }
+}
+
+function istomb() {
+    if (ispcture1) {
+        tombopen = true
+        for (i = 0; i < blks.length; i++) {
+            blks[i].style.visibility = 'hidden'
+            blks[i].style.opacity = '0'
+        }
+        yadang.style.visibility = 'visible'
+        yadang.style.opacity = '1'
+
+        for (i = 0; i < pictures.length; i++) {
+            pictures[i].style.backgroundImage = 'url(../redimage/tomb.png)'
+            pictures[i].removeEventListener('click', istomb)
+        }
+        // for (i = 0; i < clue1.length; i++) {
+        //     clue1[i].style.visibility = 'visible'
+        //     clue1[i].style.opacity = '1'
+        // }
+    }
+}
+function tombchange() {
+    if (tombsecond && tombopen && isred && !clear(isCollect1)) {
+        this.style.backgroundImage = 'url(../redimage/picture1.png)'
+    } else if (tombsecond && tombopen && !isred && clear(isCollect1)) {
+        this.style.backgroundImage = 'url(../redimage/picture1.png)'
+    }
+}
+function tombchangeback() {
+    if (tombsecond && tombopen && isred && !clear(isCollect1)) {
+        this.style.backgroundImage = 'url(../redimage/tomb.png)'
+    } else if (tombsecond && tombopen && !isred && clear(isCollect1)) {
+        this.style.backgroundImage = 'url(../redimage/picture2.png)'
+    }
+}
+gettxbycondition(pictures, tx4, 'mouseenter')
+gettx(uploads, tx5)
+//#endregion
+
+

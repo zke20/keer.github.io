@@ -40,6 +40,8 @@ var windows = content.children;
 //游戏主页
 var works = document.querySelectorAll('.work');
 var innerboxes = document.querySelectorAll('.innerbox');
+var sticks = document.querySelectorAll('.stick')
+var buttons = document.querySelectorAll('button')
 //游戏1
 var buttonred = document.querySelector('.buttonred');
 var redisright = document.querySelector('.redisright');
@@ -96,9 +98,17 @@ function tubestyle(tube, iscolorful) {//水管背景图片更改
     tube.style.backgroundImage = 'url("../images/tube2.png")';
   }
 }
-function rotate(i, j, k) {//随滚动旋转
+function rotate(i, j, k, max) {//随滚动旋转
   var degre = 0.4 * (window.scrollY - j);
-  i.style.transform = ' rotate(' + k * degre + 'deg)';
+  if (max !== null) {
+    if (k * degre > 0) {
+      i.style.transform = ' rotate(' + Math.min(max, (k * degre) | 360) + 'deg)';
+    } else {
+      i.style.transform = ' rotate(' + Math.max(-1 * max, (k * degre) | 360) + 'deg)';
+    }
+  } else {
+    i.style.transform = ' rotate(' + k * degre + 'deg)';
+  }
 }
 function scales(obj, x) {//鼠标经过放大事件
   obj.addEventListener('mouseenter', function () {
@@ -211,7 +221,7 @@ document.addEventListener('scroll', function () {
     mex = me.offsetLeft
   } else if (me.getBoundingClientRect().top - windows[2].getBoundingClientRect().top > 1.5 * windows[2].offsetHeight &&//me与绿盒子分离一段后
     btns[1].getBoundingClientRect().left - 0.25 * minusbtn > me.getBoundingClientRect().left) {//me还没到达起跳点
-    console.log('这是' + 5)
+    // console.log('这是' + 5)
     me.style.top = relativeY(40, 60) + 'px';
     my = me.offsetTop
   }
@@ -319,7 +329,7 @@ document.addEventListener('scroll', function () {
 //#region ----------给照片加旋转-----------
 document.addEventListener('scroll', function () {
   if (window.scrollY >= 2268) {
-    rotate(pict, 2268, -0.2)
+    rotate(pict, 2268, -0.2, null)
   } else {
     qqb.style.transform = 'rotate(0deg)';
   }
@@ -330,7 +340,7 @@ document.addEventListener('scroll', function () {
 var originTx1Y = originY(tx1);
 document.addEventListener('scroll', function () {
   if (me.getBoundingClientRect().top >= tx1.getBoundingClientRect().top) {
-    rotate(qqb, qqby, -1);
+    rotate(qqb, qqby, -1, null);
     // console.log('new' + qqby)
     if (movespeed(-1, qqby) + originTx1Y < 0.111 * tx1.parentElement.offsetHeight) {
       tx1.style.top = 0.111 * tx1.parentElement.offsetHeight + 'px';
@@ -466,10 +476,10 @@ function left(obj, x, y) {
 }
 
 document.addEventListener('scroll', function () {//全体游戏盒子向左向右
-  var speed = -0.1
+  var speed = -0.8
   if (me.offsetLeft < arch.getBoundingClientRect().left - 62) {//me还没走到头
     y3 = window.scrollY
-    speed = 0.1
+    speed = 0.8
     // console.log('盒子应该向左')
   }
   left(botoms[1], speed, 0.9 * window.innerWidth * 0.016)
@@ -557,24 +567,20 @@ for (i = 0, j = 1; i < windows.length; i++, j += 2) {
     scales(btns[j], 1.2)
 }
 //#endregion
-//#region -----PLAY按钮-----
+//#region -----PLAY按钮与stick-----
 var locationwork = [window.scrollY > 8744 && window.scrollY < 8744 + 3400,//红
 window.scrollY > 8744 + 3400 && window.scrollY < 8744 + 3400 * 2,//黄
 window.scrollY > 8744 + 3400 * 2 && window.scrollY < 8744 + 3400 * 3,//绿
 window.scrollY > 8744 + 3400 * 3 && window.scrollY < 8744 + 3400 * 4]//紫
-scales(buttonred, 1.2)
+
 scales(buttongreen, 1.2)
 document.addEventListener('scroll', function () {
-  // console.log(window.scrollY);
-  if (locationwork[0]) {
-    rotate(buttonred, 8744, -0.1);
-  } else {
-    buttonred.style.transform = 'rotate(0deg)';
+  for (i = 0; i < buttons.length; i++) {
+    rotate(buttons[i], 8744, -0.1, null);
+    scales(buttons[i], 1.2)
   }
-  if (locationwork[2]) {//绿色PLAY按钮旋转
-    rotate(buttongreen, 8744 + 3400 * 2, -0.1)
-  } else {
-    buttongreen.style.transform = 'rotate(0deg)';
+  for (i = 0; i < sticks.length; i++) {
+    rotate(sticks[i], 8744, -0.1, 180);
   }
 })
 //#endregion
@@ -641,7 +647,7 @@ function detectZoom() {
   if (ratio !== 100) {
     console.log('eeeeee')
     suggest.style.display = 'block'
-    suggest.innerHTML = '<p>The current window zoom ratio is' + ratio + '%,<br>it is recommended to be adjusted to 100% for the best experience</p>'
+    suggest.innerHTML = '<p>The current window zoom ratio is ' + ratio + '%,<br>it is recommended to be adjusted to 100% for the best experience</p>'
   } else {
     suggest.style.display = 'none'
   }
