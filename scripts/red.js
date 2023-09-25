@@ -336,6 +336,7 @@ var silent = false
 var yinxiao = document.querySelector('.yinxiao')
 var isend = false
 var endall = document.querySelector('.endall')
+var hei = document.querySelector('.hei')
 //#endregion
 //#region --------------------------------------------旁白---------------------------------------
 var tx1 = ['It is not safe for children.<br>别让小孩看见。',//马赛克
@@ -1319,5 +1320,7 @@ function tombchangeback() {
 gettxbycondition(pictures, tx4, 'mouseenter')
 gettx(uploads, tx5)
 //#endregion
-
+window.onload = function () {
+    hei.style.display = 'none'
+}
 
