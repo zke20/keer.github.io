@@ -587,7 +587,7 @@ document.addEventListener('scroll', function () {
 //#region ---------视频暂停-----------
 document.addEventListener('scroll', function () {
   if (locationwork[0]) {//红色播放视频链接与停止
-    redisright.src = 'https://www.youtube.com/embed/Twhcujuxp0k?si=_JLrxcRNkwBzgdKR'
+    redisright.src = 'https://www.youtube.com/embed/m_27WW33Ji4?si=eUFNQBDwJrKZu8uL'
   } else {
     redisright.src = ' ';
   }
