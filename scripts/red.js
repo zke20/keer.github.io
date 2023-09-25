@@ -1,4 +1,26 @@
+// const observer = new PerformanceObserver(list)=> {
+//     const entries = list.getEntries();
+//     let totalBytes = 0;
+//     let loadedBytes = 0;
+//     for (const entry of entries) {
+//         totalBytes += entry.transferSize;
+//         loadedBytes += entry.encodedBodySize || entry.decodedBodySize
 
+//     }
+//     const progress = loadedBytes / totalBytes * 100;
+//     console.log('静态资源加载进度：${progress.toFixed(2)}')
+// }
+// observer.observe({ entryTypes: ['resource'] })
+// const resources = window.performance.getEntriesByType('resource')
+// let totalBytes = 0;
+// let loadedBytes = 0;
+// for (const resource of resources) {
+//     totalBytes += resource.transferSize;
+//     loadedBytes += resource.encodedBodySize || resource.decodedBodySize;
+
+// }
+// const progress = loadedBytes / totalBytes * 100;
+// console.log('静态资源加载进度：${progress.toFixed(2)}')
 //#region -----------------------------------函数----------------------------------------
 function animatetop(obj, target, steptime, callback) {//苹果动画
     clearInterval(obj.timer);
@@ -1321,6 +1343,10 @@ gettxbycondition(pictures, tx4, 'mouseenter')
 gettx(uploads, tx5)
 //#endregion
 window.onload = function () {
-    hei.style.display = 'none'
+    hei.innerHTML = 'click to start'
 }
+hei.addEventListener('click', function () {
+    hei.style.display = 'none'
+})
+
 
