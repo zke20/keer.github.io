@@ -8,6 +8,7 @@ var keer1 = document.querySelector('#head3');
 var keer2 = document.querySelector('#right3')
 var arch = document.querySelector('#right1')
 var boxes = document.querySelectorAll('.box');
+var imgdetails = document.querySelectorAll('.imgdetail');
 //#endregion
 //#region 原始坐标
 var originmeX = originX(me);
@@ -45,11 +46,17 @@ var buttons = document.querySelectorAll('button')
 //游戏1
 var buttonred = document.querySelector('.buttonred');
 var redisright = document.querySelector('.redisright');
+var reddetail = document.querySelector('.reddetail');
+//游戏2
+var yellowdetail = document.querySelector('.yellowdetail');
+var buttonyellow = document.querySelector('.buttonyellow');
 //游戏3
 var buttongreen = document.querySelector('.button1');
 var drag = document.querySelector('.drag');
 //游戏4
 var concert = document.querySelector('.concert');
+var purpledetail = document.querySelector('.purpledetail');
+var purpledetail2 = document.querySelector('.purpledetail2');
 //结束盒子
 var end = document.querySelector('.end');
 //开始提示语
@@ -108,6 +115,42 @@ function rotate(i, j, k, max) {//随滚动旋转
     }
   } else {
     i.style.transform = ' rotate(' + k * degre + 'deg)';
+  }
+}
+function xmove(i, j, k, max, x) {//随滚动水平移动
+  var distant = 0.4 * (window.scrollY - j);
+  if (max !== null) {
+    if (k * distant > 0) {
+      i.style.left = Math.min(max, k * distant) + x + 'px';
+    } else {
+      i.style.left = Math.max(-1 * max, k * distant) + x + 'px';
+    }
+  } else {
+    i.style.left = k * distant + x + 'px';
+  }
+}
+function xmoveright(i, j, k, max, x) {//随滚动水平移动2
+  var distant = 0.4 * (window.scrollY - j);
+  if (max !== null) {
+    if (k * distant > 0) {
+      i.style.right = Math.min(max, k * distant) + x + 'px';
+    } else {
+      i.style.right = Math.max(-1 * max, k * distant) + x + 'px';
+    }
+  } else {
+    i.style.right = k * distant + x + 'px';
+  }
+}
+function ymove(i, j, k, max) {//随滚动竖直移动
+  var distant = 0.4 * (window.scrollY - j);
+  if (max !== null) {
+    if (k * distant > 0) {
+      i.style.top = Math.min(max, k * distant) + 'px';
+    } else {
+      i.style.top = Math.max(-1 * max, k * distant) + 'px';
+    }
+  } else {
+    i.style.top = k * distant + 'px';
   }
 }
 function scales(obj, x) {//鼠标经过放大事件
@@ -398,12 +441,13 @@ for (i = 0; i < windows.length; i++) {
 function btn(obj, y) {
   obj.style.transform = 'translate(0,' + y + 'px)'
 }
-
-function ifbtn(obj, obj2, work) {
+var openwork = 0
+function ifbtn(obj, obj2, work, i) {
   if (me.getBoundingClientRect().left >= obj.getBoundingClientRect().left + 0.25 * minusbtn &&
     me.getBoundingClientRect().left < obj2.getBoundingClientRect().left + 0.25 * minusbtn) {
     btn(obj, 50);//----35页边距代表按钮下落距离-----
     visibility(work, 'visible');
+    openwork = i
   } else {
     if (me.getBoundingClientRect().left > keer2.getBoundingClientRect().left - 100) {
       visibility(work, 'visible');
@@ -413,13 +457,14 @@ function ifbtn(obj, obj2, work) {
     }
 
   }
+
 }
 //----------调取作品-----------
 document.addEventListener('scroll', function () {
-  ifbtn(btns[1], btns[3], works[0]);
-  ifbtn(btns[3], btns[5], works[1]);
-  ifbtn(btns[5], btns[7], works[2]);
-  ifbtn(btns[7], keer2, works[3]);
+  ifbtn(btns[1], btns[3], works[0], 0);
+  ifbtn(btns[3], btns[5], works[1], 1);
+  ifbtn(btns[5], btns[7], works[2], 2);
+  ifbtn(btns[7], keer2, works[3], 3);
 })
 //#endregion
 //#region 建筑部分
@@ -507,7 +552,7 @@ document.addEventListener('scroll', function () {
 })
 
 document.addEventListener('scroll', function () {
-  if (box['offsetLeft'] <= -5583) {
+  if (box['offsetLeft'] <= -7500) {
     gameall.style.display = 'none'
     starts[0].innerText = 'SEE';
     starts[1].innerText = 'YOU';
@@ -577,10 +622,18 @@ scales(buttongreen, 1.2)
 document.addEventListener('scroll', function () {
   for (i = 0; i < buttons.length; i++) {
     rotate(buttons[i], 8744, -0.1, null);
+    xmove(reddetail, 8744, -0.5, null);
+    xmove(purpledetail2, 8744 + 3400 * 3, -0.5, null, 760);
+    xmoveright(purpledetail, 8744 + 3400 * 3, -0.5, null, 560);
+    ymove(yellowdetail, 8744 + 3400, -0.5, null);
     scales(buttons[i], 1.2)
   }
   for (i = 0; i < sticks.length; i++) {
     rotate(sticks[i], 8744, -0.1, 180);
+    xmove(reddetail, 8744, -0.5, 580);
+    xmove(purpledetail2, 8744 + 3400 * 3, -0.5, 880, 760);
+    xmoveright(purpledetail, 8744 + 3400 * 3, -0.5, 880, 560);
+    ymove(yellowdetail, 8744 + 3400, -0.5, 580);
   }
 })
 //#endregion
@@ -620,9 +673,11 @@ function rsize() {//调整视口自适应尺寸
   for (i = 0; i < innerboxes.length; i++) {
     innerboxes[i].firstElementChild.style.height = window.innerHeight * 0.88 + 'px'
   }
-  for (i = 1; i < innerboxes.length; i += 2) {
-    btns[i].style.fontSize = window.innerWidth / 1920 * 18 + 'px'
+  for (i = 1; i < 8; i += 2) {
+    btns[i].style.fontSize = window.innerWidth / 1920 * 15 + 'px'
+    // console.log(innerboxes.length)
   }
+
 }
 window.addEventListener('resize', rsize)
 window.addEventListener('load', rsize)
@@ -645,7 +700,7 @@ function detectZoom() {
     ratio = Math.round(ratio * 100)
   }
   if (ratio !== 100) {
-    console.log('eeeeee')
+    // console.log('eeeeee')
     suggest.style.display = 'block'
     suggest.innerHTML = '<p>The current window zoom ratio is ' + ratio + '%,<br>it is recommended to be adjusted to 100% for the best experience</p>'
   } else {
@@ -671,3 +726,138 @@ function detectZoom() {
 //   }
 // })
 //#endregion
+
+// 图片点击放大
+var redimgs = reddetail.children
+var isopendetails = [false, false, false, false]
+for (i = 0; i < redimgs.length; i++) {
+  redimgs[i].addEventListener('click', function () {
+
+    for (i = 0; i < isopendetails.length; i++) {
+      if (isopendetails[i] == true) {
+        break
+      }
+    }
+    // document.addEventListener('click', closedetail(redimgs, 0, true, isopendetails))
+    if (i >= isopendetails.length) {
+      console.log(openwork)
+      // document.removeEventListener('click', closedetail(redimgs, 0, true, isopendetails))
+      imgdetails[openwork].style.display = 'block'
+      this.style.position = 'fixed'
+      this.style.height = '75%'
+      this.style.width = '75%'
+      this.style.bottom = '10%'
+      this.style.zIndex = '7'
+      this.style.left = '50px'
+      this.style.transformOrigin = 'bottom 50%'
+      // console.log('BIAN')
+      for (i = 0; i < isopendetails.length; i++) {
+        if (redimgs[i] == this) {
+          break
+        }
+      }
+      redimgssize[i] = [redimgs[i].offsetHeight, redimgs[i].offsetWidth, redimgs[i].offsetTop, redimgs[i].offsetLeft]
+
+      isopendetails[i] = true
+      // document.removeEventListener('click', closedetail(redimgs, 0, true, isopendetails))
+      console.log(i, isopendetails)
+    } else {
+      document.removeEventListener('click', closedetail(redimgs, 0, true, isopendetails))
+    }
+
+  })
+}
+
+document.addEventListener('click', function () {
+  for (a = 0; a < isopendetails.length; a++) {
+    if (isopendetails[a] == true) {
+      break
+    }
+  }
+  // document.addEventListener('click', closedetail(redimgs, 0, true, isopendetails))
+  if (a >= isopendetails.length) {
+    // document.removeEventListener('click', closedetail(redimgs, 0, true, isopendetails))
+  }
+  // document.addEventListener('click', closedetail)
+})
+var redimgssize = [], yellowimgssize = [], imgsize = [redimgssize, yellowimgssize]
+function closedetail(obj, n, x, de) {
+  for (i = 0; i < obj.length; i++) {
+    if (de[i] == true) {
+      console.log(i, '变回去')
+      imgdetails[openwork].style.display = 'none'
+      obj[i].style.position = 'absolute'
+      obj[i].style.width = imgsize[n][i][1] + 'px'
+      obj[i].style.height = imgsize[n][i][0] + 'px'
+
+
+      if (x == true) {
+        obj[i].style.bottom = '0px'
+        obj[i].style.left = imgsize[n][i][3] + 'px'
+      } else {
+        obj[i].style.right = '0px'
+        obj[i].style.top = imgsize[n][i][2] + 'px'
+      }
+
+      obj[i].style.zIndex = '4'
+      console.log('return' + i, de)
+      de[i] = false
+
+    } else {
+      imgsize[n][i] = [obj[i].offsetHeight, obj[i].offsetWidth, obj[i].offsetTop, obj[i].offsetLeft]
+
+    }
+  }
+
+}
+
+
+var yellowimgs = yellowdetail.children
+var Yisopendetails = [false, false, false, false]
+for (i = 0; i < yellowimgs.length; i++) {
+  yellowimgs[i].addEventListener('click', function () {
+    for (i = 0; i < Yisopendetails.length; i++) {
+      if (Yisopendetails[i] == true) {
+        break
+      }
+    }
+    // document.addEventListener('click', closedetail(yellowimgs, 1, false, Yisopendetails))
+    if (i >= Yisopendetails.length) {
+      console.log(openwork)
+      // document.removeEventListener('click', closedetail(yellowimgs, 1, false, Yisopendetails))
+      imgdetails[openwork].style.display = 'block'
+      this.style.position = 'fixed'
+      this.style.top = '100px'
+      this.style.height = '85%'
+      this.style.width = '45%'
+      this.style.right = '20%'
+      this.style.zIndex = '7'
+      this.style.transformOrigin = '50% 50%'
+      for (i = 0; i < Yisopendetails.length; i++) {
+        if (yellowimgs[i] == this) {
+          break
+        }
+      }
+      yellowimgssize[i] = [yellowimgs[i].offsetHeight, yellowimgs[i].offsetWidth, yellowimgs[i].offsetTop, yellowimgs[i].offsetLeft]
+
+      Yisopendetails[i] = true
+      console.log(i, Yisopendetails)
+    } else {
+      document.removeEventListener('click', closedetail(yellowimgs, 1, false, Yisopendetails))
+    }
+
+  })
+}
+
+document.addEventListener('click', function () {
+  for (a = 0; a < Yisopendetails.length; a++) {
+    if (Yisopendetails[a] == true) {
+      break
+    }
+  }
+  // document.addEventListener('click', closedetail(yellowimgs, 1, false, Yisopendetails))
+  if (a >= Yisopendetails.length) {
+    // document.removeEventListener('click', closedetail(yellowimgs, 1, false, Yisopendetails))
+  }
+  // document.addEventListener('click', closedetail)
+})
