@@ -98,11 +98,11 @@ function visibility(i, j) {//改变可视性
 }
 function tubestyle(tube, iscolorful) {//水管背景图片更改
   if (iscolorful == 1) {
-    tube.style.backgroundImage = 'url("../images/tube.png")';
+    tube.style.backgroundImage = "../images/tube.png";
   } else if (iscolorful == null) {
     tube.style.backgroundImage = 'none';
   } else {
-    tube.style.backgroundImage = 'url("../images/tube2.png")';
+    tube.style.backgroundImage = "../images/tube2.png";
   }
 }
 function rotate(i, j, k, max) {//随滚动旋转
@@ -274,10 +274,10 @@ document.addEventListener('scroll', function () {
   if (me.getBoundingClientRect().top >= tops.getBoundingClientRect().top &&
     me.getBoundingClientRect().top <= bottom.getBoundingClientRect().top * 0.7
   ) {
-    gif.style.backgroundImage = 'url("../images/me2.gif")'
+    gif.style.backgroundImage = "../images/me2.gif";
 
   } else {
-    gif.style.backgroundImage = 'url("../images/me1.gif")'
+    gif.style.backgroundImage = "../images/me1.gif"
   }
 })
 //#endregion
@@ -406,12 +406,12 @@ document.addEventListener('scroll', function () {
     tx4.style.left = Math.min(movespeed(3, fany) + originTx4X, 860) + 'px';
     tx5.style.left = Math.min(movespeed(3, fany) + originTx5X, 930) + 'px';
     fan.style.transform = 'rotate(-30deg)';
-    fanimg.style.backgroundImage = 'url("../images/fan.gif")'
+    fanimg.style.backgroundImage = "../images/fan.gif"
   } else {
     tx4.style.left = originTx4X + 'px';
     tx5.style.left = originTx5X + 'px';
     fan.style.transform = 'rotate(30deg)';
-    fanimg.style.backgroundImage = 'url("../images/fan.png")'
+    fanimg.style.backgroundImage = "../images/fan.png"
   }
 })
 //--------给door增加悬停交互动画----------
@@ -552,7 +552,7 @@ document.addEventListener('scroll', function () {
 })
 
 document.addEventListener('scroll', function () {
-  if (box['offsetLeft'] <= -7500) {
+  if (box['offsetLeft'] <= -10000) {
     gameall.style.display = 'none'
     starts[0].innerText = 'SEE';
     starts[1].innerText = 'YOU';
@@ -568,7 +568,7 @@ document.addEventListener('scroll', function () {
 for (i = 0; i < trees.length; i++) {
   scales(trees[i], 1.1)
   trees[i].addEventListener('click', function () {
-    this.style.backgroundImage = 'url(../images/tree' + (geti(this, trees) + 1) + '.gif)'
+    this.style.backgroundImage = '../images/tree' + (geti(this, trees) + 1) + '.gif'
   })
 }
 
@@ -599,7 +599,9 @@ for (i = 0, j = 1; i < windows.length; i++, j += 2) {
       top: geti(this, windows) * 3400 + 8744,
       behavior: 'smooth'
     })
-
+    redisright.src = 'https://www.youtube.com/embed/Twhcujuxp0k?si=3wY7OfXba_0-BKeS';
+    drag.src = 'https://www.youtube.com/embed/E7H0TN79wDA?si=XR7KIpCCfS327-Wt';
+    concert.src = 'https://www.youtube.com/embed/cj4UaarC28I?si=8Hg4I3_QIH5LWEW7';
   }),
     btns[j].addEventListener('click', function () {
 
@@ -607,16 +609,18 @@ for (i = 0, j = 1; i < windows.length; i++, j += 2) {
         top: (geti(this, btns) - 1) / 2 * 3400 + 8744,
         behavior: 'smooth'
       })
-
+      redisright.src = 'https://www.youtube.com/embed/Twhcujuxp0k?si=3wY7OfXba_0-BKeS';
+      drag.src = 'https://www.youtube.com/embed/E7H0TN79wDA?si=XR7KIpCCfS327-Wt';
+      concert.src = 'https://www.youtube.com/embed/cj4UaarC28I?si=8Hg4I3_QIH5LWEW7';
     }),
     scales(btns[j], 1.2)
 }
 //#endregion
 //#region -----PLAY按钮与stick-----
-var locationwork = [window.scrollY > 8744 && window.scrollY < 8744 + 3400,//红
-window.scrollY > 8744 + 3400 && window.scrollY < 8744 + 3400 * 2,//黄
-window.scrollY > 8744 + 3400 * 2 && window.scrollY < 8744 + 3400 * 3,//绿
-window.scrollY > 8744 + 3400 * 3 && window.scrollY < 8744 + 3400 * 4]//紫
+// var locationwork = [window.scrollY > 8744 && window.scrollY < 8744 + 3400,//红
+// window.scrollY > 8744 + 3400 && window.scrollY < 8744 + 3400 * 2,//黄
+// window.scrollY > 8744 + 3400 * 2 && window.scrollY < 8744 + 3400 * 3,//绿
+// window.scrollY > 8744 + 3400 * 3 && window.scrollY < 8744 + 3400 * 4]//紫
 
 scales(buttongreen, 1.2)
 document.addEventListener('scroll', function () {
@@ -638,23 +642,28 @@ document.addEventListener('scroll', function () {
 })
 //#endregion
 //#region ---------视频暂停-----------
-document.addEventListener('scroll', function () {
-  if (locationwork[0]) {//红色播放视频链接与停止
-    redisright.src = 'https://www.youtube.com/embed/m_27WW33Ji4?si=eUFNQBDwJrKZu8uL'
-  } else {
-    redisright.src = ' ';
-  }
-  if (locationwork[2]) {//绿色播放视频链接与停止
-    drag.src = 'https://www.youtube.com/embed/E7H0TN79wDA?si=XR7KIpCCfS327-Wt&autoplay=1'
-  } else {
-    drag.src = ' ';
-  }
-  if (locationwork[3]) {//紫色播放视频链接与停止
-    concert.src = 'https://www.youtube.com/embed/cj4UaarC28I?si=8Hg4I3_QIH5LWEW7&autoplay=1'
-  } else {
-    concert.src = ' ';
-  }
-})
+// document.addEventListener('scroll', function () {
+//   var locationwork = [window.scrollY > 8744 && window.scrollY < 8744 + 3400,//红
+//   window.scrollY > 8744 + 3400 && window.scrollY < 8744 + 3400 * 2,//黄
+//   window.scrollY > 8744 + 3400 * 2 && window.scrollY < 8744 + 3400 * 3,//绿
+//   window.scrollY > 8744 + 3400 * 3 && window.scrollY < 8744 + 3400 * 4]//紫
+//   if (locationwork[0]) {//红色播放视频链接与停止
+//     redisright.src = 'https://www.youtube.com/embed/m_27WW33Ji4?si=RswNOW5eXMVnjwQ2'
+//   } else {
+//     // redisright.src = ' ';
+//   }
+//   if (locationwork[2]) {//绿色播放视频链接与停止
+//     drag.src = 'https://www.youtube.com/embed/E7H0TN79wDA?si=XR7KIpCCfS327-Wt'
+//   } else {
+//     // drag.src = ' ';
+//   }
+//   if (locationwork[3]) {//紫色播放视频链接与停止
+//     concert.src = 'https://www.youtube.com/embed/cj4UaarC28I?si=8Hg4I3_QIH5LWEW7'
+//   } else {
+//     // concert.src = ' ';
+//   }
+// })
+
 //#endregion
 //#region 自适应大小
 function rsize() {//调整视口自适应尺寸

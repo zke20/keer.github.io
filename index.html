@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="width=device-width", initial-scale="1" />
   <title>KeerZhu's Website</title>
   <link href="styles/style.css" rel="stylesheet" />
 </head>
@@ -111,7 +111,7 @@
           <!-- #endregion -->
           <!-- #region 掌握技能 -->
           <p class="clickskill">Click to see my skilltree</p>
-          <img src="../images/me.png" alt="" class="pict">
+          <img src="images/me.png" alt="" class="pict">
           <div class="outtree">
             <!-- #region 绘画 -->
             <ul class="tree tree1">
@@ -259,10 +259,22 @@
                 </p>
               </span>
               <span>
-                <iframe class="redisright" width="906" height="510" src="" title="YouTube video player" frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen></iframe>
+                <!-- <iframe id="redisright_player" class="redisright" width="906" height="510" src="https://www.youtube.com/embed/m_27WW33Ji4?si=RswNOW5eXMVnjwQ2" title="YouTube video player" frameborder="0"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen></iframe> -->
+
+                  <div id="RIR_player"></div>
               </span>
+              <script id="RIR_scr"> 
+                // Load the IFrame Player API code asynchronously.
+                var tag = document.createElement('script');
+                tag.src = "https://www.youtube.com/player_api";
+                var firstScriptTag = document.getElementById('RIR_scr');
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+              </script>
+
+              <script src="scripts/videos.js"></script>
+
               <a href="redisright.html" target="_blank">
                 <button class="buttonred" title="go to play in web ">PL<br>AY</button>
               </a>
@@ -307,10 +319,8 @@
 
                 </p>
               </span>
-              <span><iframe width="650" height="366" src="https://www.youtube.com/embed/GYFEbrWhTb8?si=4Y0Vut6jERupluqJ"
-                  title="YouTube video player" frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen></iframe></span>
+              <span><div id="ACJ_player"></div></span>
+                
               <span class="yellowdetail"><img src="images/yellow1.png" alt="" width="300" height="356">
                 <img src="images/yellow2.png" alt="" width="300" height="304">
                 <img src="images/yellow3.png" alt="" width="300" height="332">
@@ -353,11 +363,8 @@
                   and clever hidden easter eggs.
                 </p>
               </span>
-              <span>
-                <iframe class="drag" width="640" height="360" src="" title="YouTube video player" frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen></iframe>
-              </span>
+              <span><div id="DTA_player"></div></span>
+
               <a href="https://keerzhu.itch.io/drag-them-all" target="_blank">
                 <button class="button1" title="go to play in web ">PL<br>AY</button>
               </a>
@@ -394,11 +401,8 @@
                   I was involved in this game development during my formal employment at Tencent.
                 </p>
               </span>
-              <span>
-                <iframe class="concert" width="560" height="315" src="" title="YouTube video player" frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen></iframe>
-              </span>
+              <span><div id="CON_player" ></div></span>
+              
               <span class="purs"><span class="purpledetail">
                   <img src="images/purple1.png" alt="" width="450" height="170">
                   <img src="images/purple2.png" alt="" width="450" height="170">
@@ -503,7 +507,7 @@
                 <span><img src="images/wc6.jpg" alt="" width="370" height="250"></span>
                 <span><img src="images/wc7.jpg" alt="" width="400" height="250"></span>
                 <span><img src="images/wc8.jpg" alt="" width="400" height="250"></span>
-                <div>That's all <br>Thanks for your watching!</div>
+                <div>That's all. <br>Thanks for your watching!</div>
               </div>
               <!-- #endregion -->
             </span></div>
