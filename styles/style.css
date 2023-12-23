@@ -1096,7 +1096,7 @@ li {
   top: 100px;
   left: 330px;
   border-style: none;
-  background-image: url(../images/loading.png);
+  /* background-image: url(../images/loading.png); */
   background-size: 100%;
 }
 
@@ -1129,7 +1129,7 @@ li {
   top: 48%;
   left: 11%;
   border-style: none;
-  background-image: url(../images/loading.png);
+  /* background-image: url(../images/loading.png); */
   background-size: 100%;
 }
 
@@ -1209,7 +1209,7 @@ li {
   width: 50%;
   height: 60%;
   border-style: none;
-  background-image: url(../images/loading.png);
+  /* background-image: url(../images/loading.png); */
   background-size: 100%;
 }
 
@@ -1290,7 +1290,7 @@ li {
   width: 540px;
   height: 270px;
   border-style: none;
-  background-image: url(../images/loading.png);
+  /* background-image: url(../images/loading.png); */
   background-size: 100%;
 }
 

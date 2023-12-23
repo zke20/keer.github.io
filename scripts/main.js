@@ -599,9 +599,9 @@ for (i = 0, j = 1; i < windows.length; i++, j += 2) {
       top: geti(this, windows) * 3400 + 8744,
       behavior: 'smooth'
     })
-    redisright.src = 'https://www.youtube.com/embed/Twhcujuxp0k?si=3wY7OfXba_0-BKeS';
-    drag.src = 'https://www.youtube.com/embed/E7H0TN79wDA?si=XR7KIpCCfS327-Wt';
-    concert.src = 'https://www.youtube.com/embed/cj4UaarC28I?si=8Hg4I3_QIH5LWEW7';
+    // redisright.src = 'https://www.youtube.com/embed/Twhcujuxp0k?si=3wY7OfXba_0-BKeS';
+    // drag.src = 'https://www.youtube.com/embed/E7H0TN79wDA?si=XR7KIpCCfS327-Wt';
+    // concert.src = 'https://www.youtube.com/embed/cj4UaarC28I?si=8Hg4I3_QIH5LWEW7';
   }),
     btns[j].addEventListener('click', function () {
 
@@ -609,9 +609,9 @@ for (i = 0, j = 1; i < windows.length; i++, j += 2) {
         top: (geti(this, btns) - 1) / 2 * 3400 + 8744,
         behavior: 'smooth'
       })
-      redisright.src = 'https://www.youtube.com/embed/Twhcujuxp0k?si=3wY7OfXba_0-BKeS';
-      drag.src = 'https://www.youtube.com/embed/E7H0TN79wDA?si=XR7KIpCCfS327-Wt';
-      concert.src = 'https://www.youtube.com/embed/cj4UaarC28I?si=8Hg4I3_QIH5LWEW7';
+      // redisright.src = 'https://www.youtube.com/embed/Twhcujuxp0k?si=3wY7OfXba_0-BKeS';
+      // drag.src = 'https://www.youtube.com/embed/E7H0TN79wDA?si=XR7KIpCCfS327-Wt';
+      // concert.src = 'https://www.youtube.com/embed/cj4UaarC28I?si=8Hg4I3_QIH5LWEW7';
     }),
     scales(btns[j], 1.2)
 }
@@ -710,8 +710,8 @@ function detectZoom() {
   }
   if (ratio !== 100) {
     // console.log('eeeeee')
-    suggest.style.display = 'block'
-    suggest.innerHTML = '<p>The current window zoom ratio is ' + ratio + '%,<br>it is recommended to be adjusted to 100% for the best experience</p>'
+    // suggest.style.display = 'block'
+    // suggest.innerHTML = '<p>The current window zoom ratio is ' + ratio + '%,<br>it is recommended to be adjusted to 100% for the best experience</p>'
   } else {
     suggest.style.display = 'none'
   }

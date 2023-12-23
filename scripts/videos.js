@@ -1,10 +1,16 @@
-var RIR_player;
+// const RIR_iframe = document.getElementById('RIR_player');
+// const RIR_player = new Vimeo.Player(iframe);
+const RIR_player = new Vimeo.Player('RIR_player');
+
+var ACJ_player;
+var DTA_player;
+var CON_player;
 function onYouTubePlayerAPIReady() {
-    RIR_player = new YT.Player('RIR_player', {
-    height: '510',
-    width: '906',
-    videoId: 'GYFEbrWhTb8',
-    });
+    // RIR_player = new YT.Player('RIR_player', {
+    // height: '510',
+    // width: '906',
+    // videoId: 'jxleTEeNIWM',
+    // });
     ACJ_player = new YT.Player('ACJ_player', {
     height: '366',
     width: '650',
@@ -28,7 +34,8 @@ document.addEventListener('scroll', function () {
     window.scrollY > 8744 + 3400 * 2 && window.scrollY < 8744 + 3400 * 3,//绿
     window.scrollY > 8744 + 3400 * 3 && window.scrollY < 8744 + 3400 * 4]//紫
     if(!locationwork[0]) {
-    RIR_player.pauseVideo();
+    // RIR_player.pauseVideo();
+    RIR_player.pause();
     }
     if(!locationwork[1]) {
     ACJ_player.pauseVideo();
